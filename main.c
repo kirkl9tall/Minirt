@@ -47,9 +47,10 @@ int main  (int argc, char *argv[])
         mini->file = ft_strdup(argv[1]);
         printf ("file is  : %s\n ",mini->file);
         fd = open(mini->file,O_RDONLY);
-        if(!init_mini(mini,"MiniRT"))
+        printf ("file descis  : %d\n ",fd);
+        if(init_mini(mini,"MiniRT"))
         {
-            clean();
+            // clean();
             return 0;
         }   
         mlx_loop(mini->mlx); 
