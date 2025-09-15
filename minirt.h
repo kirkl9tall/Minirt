@@ -19,6 +19,80 @@
 # define I_W 1900
 # define I_H 1000
 # define BUFFER_SIZE 50
+
+typedef struct s_vec3
+{
+	double       x;
+	double		y;
+	double		z;
+}t_vec3;
+
+typedef struct s_color
+{
+    int r;
+    int g;
+    int b;
+}t_color;
+
+typedef struct s_amb
+{
+    float alr;
+    t_color rgb;
+}t_amb;
+
+
+typedef struct s_cam
+{
+    t_vec3 pos;
+    t_vec3 orient;
+    double fov;
+}t_cam;
+
+typedef struct s_light
+{
+    t_vec3 light_point;
+    double lbr;
+}t_light;
+
+typedef struct s_sphere
+{
+    t_vec3 sph_center;
+    double  s_diam;
+    t_color rgb;
+}t_sphere;
+
+typedef struct s_plan
+{
+    t_vec3 cor_plan;
+    t_vec3 nnv_plan;
+    t_color rgb;
+}t_plan;
+
+typedef struct s_cylin
+{
+    t_vec3 cy_center;
+    t_vec3 nv_cy;
+    double  cy_diam;
+    double cy_height;
+    t_color rgb;
+}t_cylin;
+
+typedef struct s_mini
+{
+    void			*mlx;
+	void			*win;
+    char **pars;
+    char *file;
+    t_cylin *cy;
+    t_cam   *cam;
+    t_plan  *plane;
+    t_sphere *sph;
+    t_light *light;
+    t_amb   *amb;
+
+}t_mini;
+
+
 //////////////////////////// parsing ////////////////////////////
 int	ft_atoi(char *nptr, int x);
 int	ft_isalpha(int c);
@@ -31,6 +105,9 @@ char	*ft_strchr(char *str, int c);
 char	*handle_buffer(char **boby);
 char	*get_next_line(int fd);
 char	*ft_strldup(char *s, int i);
+int check_file_mini(char *argv);
+int  init_mini (t_mini *mini, char * title);
+
 
 #endif
 
