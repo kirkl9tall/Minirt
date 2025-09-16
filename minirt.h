@@ -78,11 +78,11 @@ typedef struct s_mini
     char **pars;
     char *file;
     t_cylin *cy;
-    t_cam   *cam;
+    t_cam   cam;
     t_plan  *plane;
     t_sphere *sph;
-    t_light *light;
-    t_amb   *amb;
+    t_light light;
+    t_amb   amb;
 
 }t_mini;
 
@@ -102,9 +102,9 @@ char	*ft_strldup(char *s, int i);
 int check_file_mini(char *argv);
 int  init_mini (t_mini *mini, char * title);
 void parsing(int fd,t_mini *mini);
-double ft_atoi_double(char *nptr);
+double ft_atoi_double(char *nptr,double min, double max);
 char	**ft_split(char *s, char c);
-
+void assigner(t_mini *mini , char **splited);
 
 
 

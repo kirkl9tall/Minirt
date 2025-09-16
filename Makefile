@@ -7,7 +7,7 @@ CC      = gcc
 CFLAGS  = -Wall -Wextra -Werror -I. -I/home/the-worst/Desktop/Minirt/minilibx-linux
 MLX_DIR = /home/the-worst/Desktop/Minirt/minilibx-linux
 LDFLAGS = -L$(MLX_DIR) -L/usr/lib
-LDLIBS  = -lmlx_Linux -lXext -lX11 -lm -lz
+LDLIBS  = -lmlx_Linux -lXext -lX11 -lm -lz -g
 
 RM = rm -rf
 NAME = minirt
