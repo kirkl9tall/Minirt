@@ -27,17 +27,10 @@ typedef struct s_vec3
 	double		z;
 }t_vec3;
 
-typedef struct s_color
-{
-    int r;
-    int g;
-    int b;
-}t_color;
-
 typedef struct s_amb
 {
     float alr;
-    t_color rgb;
+    int color;
 }t_amb;
 
 
@@ -52,20 +45,21 @@ typedef struct s_light
 {
     t_vec3 light_point;
     double lbr;
+    int color;
 }t_light;
 
 typedef struct s_sphere
 {
     t_vec3 sph_center;
     double  s_diam;
-    t_color rgb;
+    int color;
 }t_sphere;
 
 typedef struct s_plan
 {
     t_vec3 cor_plan;
     t_vec3 nnv_plan;
-    t_color rgb;
+    int color;
 }t_plan;
 
 typedef struct s_cylin
@@ -74,7 +68,7 @@ typedef struct s_cylin
     t_vec3 nv_cy;
     double  cy_diam;
     double cy_height;
-    t_color rgb;
+    int color;
 }t_cylin;
 
 typedef struct s_mini
@@ -94,7 +88,7 @@ typedef struct s_mini
 
 
 //////////////////////////// parsing ////////////////////////////
-int	ft_atoi(char *nptr, int x);
+int	ft_atoi(char *nptr);
 int	ft_isalpha(int c);
 int	ft_isdigit(int x);
 char	*ft_strdup(char *s);
@@ -107,6 +101,11 @@ char	*get_next_line(int fd);
 char	*ft_strldup(char *s, int i);
 int check_file_mini(char *argv);
 int  init_mini (t_mini *mini, char * title);
+void parsing(int fd,t_mini *mini);
+double ft_atoi_double(char *nptr);
+char	**ft_split(char *s, char c);
+
+
 
 
 #endif

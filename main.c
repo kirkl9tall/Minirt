@@ -16,7 +16,7 @@ int check_file_mini(char *argv)
 	if (dot_pos == -1 || dot_pos == 0 || argv[dot_pos + 1] != 'r'
 		|| argv[dot_pos + 2] != 't' || argv[dot_pos + 3] != '\0')
 	{
-		write(2, "Error: Invalid .fdf file \n", 27);
+		write(2, "Error: Invalid .rt file \n", 27);
 		return (0);
 	}
     return (1);
@@ -35,7 +35,6 @@ int  init_mini (t_mini *mini, char * title)
 
 int main  (int argc, char *argv[])
 {
-    
     t_mini *mini;
     int fd;
 
@@ -45,15 +44,10 @@ int main  (int argc, char *argv[])
             return 0;
         mini = malloc(sizeof (t_mini));
         mini->file = ft_strdup(argv[1]);
-        printf ("file is  : %s\n ",mini->file);
         fd = open(mini->file,O_RDONLY);
-        printf ("file descis  : %d\n ",fd);
         if(init_mini(mini,"MiniRT"))
-        {
-            // clean();
             return 0;
-        }   
+        parsing(fd,mini);
         mlx_loop(mini->mlx); 
     }
-
 }

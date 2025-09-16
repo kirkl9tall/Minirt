@@ -1,10 +1,10 @@
 #include "minirt.h"
 
-int	ft_atoi(char *nptr, int x)
+int	ft_atoi(char *nptr)
 {
 	int	signe;
 	int	num;
-
+	int x = 0;
 	signe = 1;
 	num = 0;
 	while (nptr[x] == '\t' || nptr[x] == ' ' || (nptr[x] >= 9 && nptr[x] <= 13))
