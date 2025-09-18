@@ -120,7 +120,7 @@ void assign_c (t_mini *mini , char **splited)
 		mini->cam.orient.x = ft_atoi(splited_comma[0]);
 		mini->cam.orient.y = ft_atoi(splited_comma[1]);
 		mini->cam.orient.z = ft_atoi(splited_comma[2]);
-		mini->cam.fov = ft_atoi(splited[3]);
+		mini->cam.fov = ft_atoi(splited[3]);// must be 0-180;
 }
 
 void assign_l (t_mini *mini , char **splited)
