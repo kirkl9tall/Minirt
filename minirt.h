@@ -38,7 +38,12 @@ typedef struct s_cam
 {
     t_vec3 pos;
     t_vec3 orient;
+    t_vec3 up_v;
+    t_vec3 right_v;
+    double width_canva;
+    double height_canva;
     double fov;
+
 }t_cam;
 
 typedef struct s_light
@@ -70,6 +75,13 @@ typedef struct s_cylin
     double cy_height;
     int color;
 }t_cylin;
+
+typedef struct s_ray
+{
+    t_vec3 origin;
+    t_vec3 direction;
+}t_ray;
+
 
 typedef struct s_mini
 {
@@ -106,8 +118,21 @@ double ft_atoi_double(char *nptr,double min, double max);
 char	**ft_split(char *s, char c);
 void assigner(t_mini *mini , char **splited);
 
+////////////////////////////// camera projection
+
+void project_camera(t_mini *mini);
 
 
+
+
+
+////vect_math//////////////////////////////////
+t_vec3 vect_addi(t_vec3 v1,t_vec3 v2);
+t_vec3 vect_subs(t_vec3 v1,t_vec3 v2);
+t_vec3 vect_multi(t_vec3 v1,int prod);
+double vect_prod(t_vec3 v1,t_vec3 v2);
+t_vec3 vect_cross(t_vec3 v1,t_vec3 v2);
+t_vec3 vect_normalized(t_vec3 v1);
 #endif
 
 

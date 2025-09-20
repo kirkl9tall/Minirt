@@ -1,5 +1,5 @@
 SRCS = get_next_line_utils.c get_next_line.c utils_pars.c \
-       ft_split.c parsing.c main.c 
+       ft_split.c parsing.c  camera.c vec_maths.c main.c 
 
 OBJS = $(SRCS:.c=.o)
 
