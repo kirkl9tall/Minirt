@@ -38,10 +38,8 @@ int	close_window(t_mini *mini)
 	exit(0);
 }
 
-void    print_scene(t_mini *mini)
+void print_scene(t_mini *mini)
 {
-    int i = 0;
-
     printf("===== DEBUG SCENE =====\n\n");
 
     // Ambient
@@ -63,44 +61,38 @@ void    print_scene(t_mini *mini)
     printf("  ratio = %.2f, color = %d\n\n", mini->light.lbr, mini->light.color);
 
     // Spheres
-    if (mini->sph)
+    t_sphere *s = mini->sph;
+    int i = 0;
+    while (s)
     {
-        i = 0;
-        while (mini->sph[i].s_diam != 0) // stop condition depends on how you allocate!
-        {
-            printf("Sphere %d:\n", i);
-            printf("  center = (%.2f, %.2f, %.2f)\n", mini->sph[i].sph_center.x, mini->sph[i].sph_center.y, mini->sph[i].sph_center.z);
-            printf("  diam   = %.2f, color = %d\n\n", mini->sph[i].s_diam, mini->sph[i].color);
-            i++;
-        }
+        printf("Sphere %d:\n", i++);
+        printf("  center = (%.2f, %.2f, %.2f)\n", s->sph_center.x, s->sph_center.y, s->sph_center.z);
+        printf("  diam   = %.2f, color = %d\n\n", s->s_diam, s->color);
+        s = s->next;
     }
 
     // Planes
-    if (mini->plane)
+    t_plan *p = mini->plane;
+    i = 0;
+    while (p)
     {
-        i = 0;
-        while (mini->plane[i].color != 0) // same remark, depends on parsing logic
-        {
-            printf("Plane %d:\n", i);
-            printf("  point  = (%.2f, %.2f, %.2f)\n", mini->plane[i].cor_plan.x, mini->plane[i].cor_plan.y, mini->plane[i].cor_plan.z);
-            printf("  normal = (%.2f, %.2f, %.2f)\n", mini->plane[i].nnv_plan.x, mini->plane[i].nnv_plan.y, mini->plane[i].nnv_plan.z);
-            printf("  color  = %d\n\n", mini->plane[i].color);
-            i++;
-        }
+        printf("Plane %d:\n", i++);
+        printf("  point  = (%.2f, %.2f, %.2f)\n", p->cor_plan.x, p->cor_plan.y, p->cor_plan.z);
+        printf("  normal = (%.2f, %.2f, %.2f)\n", p->nnv_plan.x, p->nnv_plan.y, p->nnv_plan.z);
+        printf("  color  = %d\n\n", p->color);
+        p = p->next;
     }
 
     // Cylinders
-    if (mini->cy)
+    t_cylin *c = mini->cy;
+    i = 0;
+    while (c)
     {
-        i = 0;
-        while (mini->cy[i].cy_diam != 0) // stop condition to adapt
-        {
-            printf("Cylinder %d:\n", i);
-            printf("  center = (%.2f, %.2f, %.2f)\n", mini->cy[i].cy_center.x, mini->cy[i].cy_center.y, mini->cy[i].cy_center.z);
-            printf("  axis   = (%.2f, %.2f, %.2f)\n", mini->cy[i].nv_cy.x, mini->cy[i].nv_cy.y, mini->cy[i].nv_cy.z);
-            printf("  diam   = %.2f, height = %.2f, color = %d\n\n", mini->cy[i].cy_diam, mini->cy[i].cy_height, mini->cy[i].color);
-            i++;
-        }
+        printf("Cylinder %d:\n", i++);
+        printf("  center = (%.2f, %.2f, %.2f)\n", c->cy_center.x, c->cy_center.y, c->cy_center.z);
+        printf("  axis   = (%.2f, %.2f, %.2f)\n", c->nv_cy.x, c->nv_cy.y, c->nv_cy.z);
+        printf("  diam   = %.2f, height = %.2f, color = %d\n\n", c->cy_diam, c->cy_height, c->color);
+        c = c->next;
     }
 
     printf("===== END SCENE =====\n");
@@ -116,11 +108,12 @@ int main  (int argc, char *argv[])
         if(!check_file_mini(argv[1]))
             return 0;
         mini = malloc(sizeof (t_mini));
+        memset(mini , 0 , sizeof(t_mini));
         mini->file = ft_strdup(argv[1]);
         fd = open(mini->file,O_RDONLY);
+        parsing(fd,mini);
         if(init_mini(mini,"MiniRT"))
             return 0;
-        parsing(fd,mini);
         project_camera(mini);
         print_scene(mini);
 		mlx_hook(mini->win, 17, 0, close_window, mini);

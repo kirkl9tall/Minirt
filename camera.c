@@ -15,11 +15,9 @@ void project_camera(t_mini *mini)
     rand_vec.y = 1;
     rand_vec.z = 0;
     // check_ori(mini->cam.orient);
-    if (check_cross(rand_vec,mini->cam.orient))
-        
+    // check_cross(rand_vec,mini->cam.orient);`
     mini->cam.right_v = vect_cross(rand_vec,mini->cam.orient);
     mini->cam.up_v = vect_cross(mini->cam.orient,mini->cam.right_v);
-
-    // printf("x : %lf  y :%lf  z : %lf \n",right_vec.x,right_vec.y,right_vec.z);
-
+    mini->cam.width_canva = 2 * tan(mini->cam.fov * 0.01745329 / 2);
+    mini->cam.height_canva =  (mini->cam.width_canva * W_H) / W_W ;
 }
