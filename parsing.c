@@ -310,7 +310,6 @@ void	parsing(int fd, t_mini *mini)
 		splited = ft_split(content, ' ', &mini->gc);
 		assigner(mini, splited);
 		// printf("%s",content);
-		free(content);
 		content = get_next_line(fd, &mini->gc);
 	}
 }

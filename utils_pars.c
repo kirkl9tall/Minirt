@@ -59,6 +59,26 @@ char	*ft_strdup(char *s, t_gc **gc)
 	dup[i] = '\0';
 	return (dup);
 }
+
+char	*ft_strjoin(char *s1, char *s2, t_gc **gc)
+{
+	size_t	len1;
+	size_t	len2;
+	char	*res;
+	size_t	i;
+
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	res = gc_malloc(gc, len1 + len2 + 1);
+	i = 0;
+	while (*s1)
+		res[i++] = *s1++;
+	while (*s2)
+		res[i++] = *s2++;
+	res[i] = '\0';
+	return (res);
+}
+
 // void	read_file(t_fdf *fdf)
 // {
 // 	char	*arr;

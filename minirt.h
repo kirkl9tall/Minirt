@@ -2,6 +2,7 @@
 # define MINIRT_H
 
 # include "GC/gc.h"
+#include "GNL/gnl.h"
 # include "minilibx-linux/mlx.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
@@ -18,8 +19,6 @@
 # define W_W 1800
 # define W_H 1000
 
-# define BUFFER_SIZE 50
-
 typedef struct s_vec3
 {
 	double			x;
@@ -30,7 +29,7 @@ typedef struct s_vec3
 typedef struct s_amb
 {
 	float			alr;
-	int				color;
+	t_vec3			color;
 }					t_amb;
 
 typedef struct s_cam
@@ -49,14 +48,14 @@ typedef struct s_light
 {
 	t_vec3			light_point;
 	double			lbr;
-	int				color;
+	t_vec3			color;
 }					t_light;
 
 typedef struct s_sphere
 {
 	t_vec3			sph_center;
 	double			s_diam;
-	int				color;
+	t_vec3			color;
 	struct s_sphere	*next;
 }					t_sphere;
 
@@ -64,7 +63,7 @@ typedef struct s_plan
 {
 	t_vec3			cor_plan;
 	t_vec3			nnv_plan;
-	int				color;
+	t_vec3			color;
 	struct s_plan	*next;
 }					t_plan;
 
@@ -74,7 +73,7 @@ typedef struct s_cylin
 	t_vec3			nv_cy;
 	double			cy_diam;
 	double			cy_height;
-	int				color;
+	t_vec3			color;
 	struct s_cylin	*next;
 }					t_cylin;
 
@@ -83,11 +82,19 @@ typedef struct s_ray
 	t_vec3			origin;
 	t_vec3			direction;
 }					t_ray;
-
-typedef struct s_mini
+typedef struct s_mlx
 {
 	void			*mlx;
 	void			*win;
+	void			*img;
+	char			*addr;
+	int				bpp;
+	int				size_line;
+	int				endian;
+}					t_mlx;
+typedef struct s_mini
+{
+	t_mlx			mlx_utils;
 	char			**pars;
 	char			*file;
 	t_cylin			*cy;
@@ -107,7 +114,7 @@ int					ft_isdigit(int x);
 char				*ft_strdup(char *s, t_gc **gc);
 size_t				ft_strlen(char *str);
 int					checker(char *str, int c);
-char				*ft_strjoin(char *s1, char *s2);
+char				*ft_strjoin(char *s1, char *s2, t_gc **gc);
 char				*ft_strchr(char *str, int c);
 char				*handle_buffer(char **boby);
 char				*get_next_line(int fd, t_gc **gc);
