@@ -101,20 +101,23 @@ void print_scene(t_mini *mini)
 int main  (int argc, char *argv[])
 {
     t_mini *mini;
+    t_gc *gc;
     int fd;
 
     if (argc == 2)
     {
         if(!check_file_mini(argv[1]))
             return 0;
-        mini = malloc(sizeof (t_mini));
+        mini = gc_malloc(&gc, sizeof (t_mini));
         memset(mini , 0 , sizeof(t_mini));
-        mini->file = ft_strdup(argv[1]);
+        mini->gc = gc;
+        mini->file = ft_strdup(argv[1], &gc);
         fd = open(mini->file,O_RDONLY);
         parsing(fd,mini);
         if(init_mini(mini,"MiniRT"))
             return 0;
         project_camera(mini);
+        render_scene(mini);// TODO
         print_scene(mini);
 		mlx_hook(mini->win, 17, 0, close_window, mini);
         mlx_loop(mini->mlx); 

@@ -40,24 +40,25 @@ int	ft_isdigit(int x)
 	return (0);
 }
 
-char	*ft_strdup(char *s)
+char	*ft_strdup(char *s, t_gc **gc)
 {
-	char	*p;
-	int		x;
+	size_t	len;
+	char	*dup;
+	size_t	i;
 
-	x = 0;
-	p = malloc(ft_strlen((char *)s) + 1);
-	if (p == NULL)
+	if (!s)
 		return (NULL);
-	while (s[x])
+	len = ft_strlen(s) + 1;
+	dup = gc_malloc(gc, len);
+	i = 0;
+	while (s[i])
 	{
-		p[x] = s[x];
-		x++;
+		dup[i] = s[i];
+		i++;
 	}
-	p[x] = '\0';
-	return (p);
+	dup[i] = '\0';
+	return (dup);
 }
-
 // void	read_file(t_fdf *fdf)
 // {
 // 	char	*arr;

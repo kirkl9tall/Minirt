@@ -1,104 +1,90 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sel-abbo <sel-abbo@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/26 10:03:03 by zatais            #+#    #+#             */
+/*   Updated: 2025/08/03 16:09:22 by sel-abbo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
-static int	count_word(char *s, char c)
+static int	w_counter(char *s, char c)
 {
-	int	x;
 	int	count;
+	int	i;
 
-	x = 0;
 	count = 0;
-	while (s[x])
+	i = 0;
+	while (s[i])
 	{
-		if ((x == 0 && s[x] != c) || (s[x] != c && s[x - 1] == c))
-		{
+		while (s[i] && s[i] == c)
+			i++;
+		if (s[i])
 			count++;
-			x++;
-		}
-		else
-			x++;
+		while (s[i] && s[i] != c)
+			i++;
 	}
 	return (count);
 }
 
-static void	freealloc(char **p, int y)
+static int	w_len(char *s, char c)
 {
-	while (y >= 0)
-	{
-		free(p[y]);
-		y--;
-	}
-	free(p);
+	int	len;
+
+	len = 0;
+	while (s[len] && s[len] != c)
+		len++;
+	return (len);
 }
 
-static char	**amar(char *s, char **p, char c, int countty)
+static char	*extract_w(char *s, int len, t_gc **gc)
 {
-	int	x;
-	int	y;
-	int	z;
+	char	*word;
+	int		i;
 
-	x = 0;
-	y = 0;
-	z = 0;
-	while (s[x] && countty > 0)
+	i = 0;
+	word = gc_malloc(gc, len + 1);
+	while (i < len)
 	{
-		while (s[x] == c)
-			x++;
-		while (s[x] && s[x] != c)
-		{
-			p[z][y++] = s[x++];
-		}
-		countty--;
-		p[z][y] = '\0';
-		if (s[x] || p[z])
-			z++;
-		y = 0;
+		word[i] = s[i];
+		i++;
 	}
-	p[z] = NULL;
-	return (p);
+	word[i] = '\0';
+	return (word);
 }
 
-static void	allocation(char *s, char **p, char c)
+void	fill_res(char *s, char c, char **res, t_gc **gc)
 {
-	int	x;
-	int	y;
-	int	w;
+	int	idx;
+	int	len;
 
-	x = 0;
-	y = 0;
-	w = 0;
-	while (s[x])
+	idx = 0;
+	while (*s)
 	{
-		while (s[x] == c)
-			x++;
-		while (s[x] && s[x] != c)
+		while (*s && *s == c)
+			s++;
+		if (*s)
 		{
-			x++;
-			w++;
+			len = w_len(s, c);
+			res[idx] = extract_w(s, len, gc);
+			idx++;
+			s += len;
 		}
-		if (w > 0)
-		{
-			p[y] = malloc((w + 1) * sizeof(char));
-			if (!p[y])
-				freealloc(p, y - 1);
-			y++;
-		}
-		w = 0;
 	}
+	res[idx] = NULL;
 }
 
-char	**ft_split(char *s, char c)
+char	**ft_split(char *s, char c, t_gc **gc)
 {
-	char			**p;
-	unsigned int	countty;
+	char	**res;
 
 	if (!s)
-	{
 		return (NULL);
-	}
-	countty = count_word(s, c);
-	p = malloc((countty + 1) * sizeof(char *));
-	if (p == NULL)
-		return (NULL);
-	allocation(s, p, c);
-	return (amar(s, p, c, countty));
+	res = gc_malloc(gc, sizeof(char *) * (w_counter(s, c) + 1));
+	fill_res(s, c, res, gc);
+	return (res);
 }
