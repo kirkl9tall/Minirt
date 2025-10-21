@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: m45kf4c3 <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/20 15:58:25 by m45kf4c3          #+#    #+#             */
+/*   Updated: 2025/10/20 15:58:26 by m45kf4c3         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
 # include "GC/gc.h"
-#include "GNL/gnl.h"
+# include "GNL/gnl.h"
 # include "minilibx-linux/mlx.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
@@ -92,6 +104,15 @@ typedef struct s_mlx
 	int				size_line;
 	int				endian;
 }					t_mlx;
+typedef struct s_hit
+{
+    double      t;
+    t_vec3      point;
+    t_vec3      normal;
+    t_vec3      color;
+} t_hit;
+
+
 typedef struct s_mini
 {
 	t_mlx			mlx_utils;
@@ -133,8 +154,10 @@ void				project_camera(t_mini *mini);
 ////vect_math//////////////////////////////////
 t_vec3				vect_addi(t_vec3 v1, t_vec3 v2);
 t_vec3				vect_subs(t_vec3 v1, t_vec3 v2);
-t_vec3				vect_multi(t_vec3 v1, int prod);
+t_vec3				vect_multi(t_vec3 v1, double prod);
 double				vect_prod(t_vec3 v1, t_vec3 v2);
 t_vec3				vect_cross(t_vec3 v1, t_vec3 v2);
 t_vec3				vect_normalized(t_vec3 v1);
+///////////////////////////////////////////////
+void				render_scene(t_mini *mini);
 #endif
