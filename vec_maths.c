@@ -51,6 +51,8 @@ t_vec3	vect_normalized(t_vec3 v1)
 	double	len;
 
 	len = sqrt((v1.x * v1.x) + (v1.y * v1.y) + (v1.z * v1.z));
+    if (len < 1e-8)
+		return (v1);
 	v.x = v1.x / len;
 	v.y = v1.y / len;
 	v.z = v1.z / len;

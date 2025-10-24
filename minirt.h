@@ -28,8 +28,8 @@
 # include <string.h> //forbiden memset
 # include <unistd.h>
 
-# define W_W 1800
-# define W_H 1000
+# define W_W 720
+# define W_H 720
 
 typedef struct s_vec3
 {
@@ -60,14 +60,14 @@ typedef struct s_light
 {
 	t_vec3			light_point;
 	double			lbr;
-	t_vec3			color;
+	int			color;
 }					t_light;
 
 typedef struct s_sphere
 {
 	t_vec3			sph_center;
 	double			s_diam;
-	t_vec3			color;
+	int			color;
 	struct s_sphere	*next;
 }					t_sphere;
 
@@ -75,7 +75,7 @@ typedef struct s_plan
 {
 	t_vec3			cor_plan;
 	t_vec3			nnv_plan;
-	t_vec3			color;
+	int			color;
 	struct s_plan	*next;
 }					t_plan;
 
@@ -85,7 +85,7 @@ typedef struct s_cylin
 	t_vec3			nv_cy;
 	double			cy_diam;
 	double			cy_height;
-	t_vec3			color;
+	int			color;
 	struct s_cylin	*next;
 }					t_cylin;
 
@@ -109,7 +109,7 @@ typedef struct s_hit
     double      t;
     t_vec3      point;
     t_vec3      normal;
-    t_vec3      color;
+    int      color;
 } t_hit;
 
 
