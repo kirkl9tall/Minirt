@@ -20,40 +20,59 @@ int	main(void)
 	mini.mlx_utils.addr = mlx_get_data_addr(mini.mlx_utils.img,
 			&mini.mlx_utils.bpp, &mini.mlx_utils.size_line,
 			&mini.mlx_utils.endian);
-	// In your main function, after initializing MLX:
+
 	// Initialize camera with proper FOV
 	mini.cam.pos = (t_vec3){0, 0, 0};
-	mini.cam.orient = vect_normalized((t_vec3){0, 0, 1}); // Normalized forward
-	mini.cam.up_v = vect_normalized((t_vec3){0, 1, 0});   // Normalized up
-	mini.cam.right_v = vect_normalized(vect_cross(mini.cam.orient,
-				mini.cam.up_v));
+	mini.cam.orient = vect_normalized((t_vec3){0, 0, 1});
+	mini.cam.up_v = vect_normalized((t_vec3){0, 1, 0});
+	mini.cam.right_v = vect_normalized(vect_cross(mini.cam.orient, mini.cam.up_v));
+	
 	// Use FOV to calculate viewport size
-	double fov = 60.0; // degrees
+	double fov = 60.0;
 	aspect_ratio = (double)W_W / (double)W_H;
 	scale = tan(fov * 0.5 * M_PI / 180.0);
 	mini.cam.width_canva = 2.0 * scale * aspect_ratio;
 	mini.cam.height_canva = 2.0 * scale;
+
 	// Create a sphere
 	mini.sph = malloc(sizeof(t_sphere));
-	mini.sph->sph_center = (t_vec3){0, 0, 5}; // Positioned 5 units in front
+	if (!mini.sph)
+		return (1);
+	mini.sph->sph_center = (t_vec3){0, 0, 5};
 	mini.sph->s_diam = 2.0;
-	mini.sph->color = 0xFF0000; // Red color
+	mini.sph->color = (t_vec3){255, 0, 0};
 	mini.sph->next = NULL;
-	// Create a plane
+
+	// Create a plane  
 	mini.plane = malloc(sizeof(t_plan));
-	mini.plane->cor_plan = (t_vec3){0, -2, 0}; // Positioned below
-	mini.plane->nnv_plan = (t_vec3){0, 1, 0};  // Normal pointing up
-	mini.plane->color = 0x00FF00;              // Green color
+	if (!mini.plane)
+		return (1);
+	mini.plane->cor_plan = (t_vec3){0, -2, 0};
+	mini.plane->nnv_plan = (t_vec3){0, 1, 0};
+	mini.plane->color = (t_vec3){0, 255, 0};
 	mini.plane->next = NULL;
-	// Set cylinder to NULL since we're not testing it
+
+	// Set cylinder to NULL
 	mini.cy = NULL;
+
+	// ADD AMBIENT LIGHTING (THIS WAS MISSING!)
+	mini.amb.alr = 0.3;  // 30% ambient light
+	mini.amb.color = (t_vec3){255, 255, 255};  // White ambient light
+
+	// ADD LIGHT SOURCE (THIS WAS MISSING!)
+	mini.light.light_point = (t_vec3){5, 5, 0};
+	mini.light.lbr = 1.0;
+	mini.light.color = (t_vec3){255, 255, 255};
+
 	// Render the scene
 	render_scene(&mini);
+
 	// Display and wait
 	mlx_put_image_to_window(mini.mlx_utils.mlx, mini.mlx_utils.win,
 		mini.mlx_utils.img, 0, 0);
 	mlx_loop(mini.mlx_utils.mlx);
-	// Cleanup (in a real program you'd want proper cleanup)
+
+	// Cleanup
 	free(mini.sph);
 	free(mini.plane);
 	return (0);

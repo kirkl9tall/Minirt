@@ -37,7 +37,7 @@ void	my_put_pixel(t_mini *mini, int x, int y, t_vec3 vec3_color)
     int color;
 	pixel = mini->mlx_utils.addr + (y * mini->mlx_utils.size_line) + (x
 			* (mini->mlx_utils.bpp / 8));
-    color = 1;//TODO
+    color = ((int)vec3_color.x << 16) | ((int)vec3_color.y << 8) | (int)vec3_color.z;
 	*(int *)pixel = color;
 }
 

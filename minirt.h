@@ -27,8 +27,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define W_W 720
-# define W_H 720
+# define W_W 2160
+# define W_H 1080
 
 typedef struct s_vec3
 {
@@ -48,31 +48,31 @@ typedef struct s_cam
 	double			width_canva;
 	double			height_canva;
 	double			fov;
-    t_vec3			pos;
-    t_vec3			orient;
-    t_vec3			up_v;
-    t_vec3			right_v;
+	t_vec3			pos;
+	t_vec3			orient;
+	t_vec3			up_v;
+	t_vec3			right_v;
 
 }					t_cam;
 
 typedef struct s_light
 {
-    t_vec3				color;
+	t_vec3			color;
 	double			lbr;
-    t_vec3			light_point;
+	t_vec3			light_point;
 }					t_light;
 
 typedef struct s_sphere
 {
-    t_vec3				color;
+	t_vec3			color;
 	double			s_diam;
-    t_vec3			sph_center;
+	t_vec3			sph_center;
 	struct s_sphere	*next;
 }					t_sphere;
 
 typedef struct s_plan
 {
-    t_vec3				color;
+	t_vec3			color;
 	t_vec3			cor_plan;
 	t_vec3			nnv_plan;
 	struct s_plan	*next;
@@ -80,11 +80,11 @@ typedef struct s_plan
 
 typedef struct s_cylin
 {
-    t_vec3				color;
-    double			cy_diam;
-    double			cy_height;
+	t_vec3			color;
+	double			cy_diam;
+	double			cy_height;
 	t_vec3			nv_cy;
-    t_vec3			cy_center;
+	t_vec3			cy_center;
 	struct s_cylin	*next;
 }					t_cylin;
 
@@ -95,9 +95,9 @@ typedef struct s_ray
 }					t_ray;
 typedef struct s_mlx
 {
-    int				bpp;
-    int				endian;
-    int				size_line;
+	int				bpp;
+	int				endian;
+	int				size_line;
 	void			*mlx;
 	void			*win;
 	void			*img;
@@ -105,24 +105,24 @@ typedef struct s_mlx
 }					t_mlx;
 typedef struct s_hit
 {
-    t_vec3				color;
+	t_vec3			color;
 	double			t;
 	t_vec3			point;
-    t_vec3			normal;
+	t_vec3			normal;
 }					t_hit;
 
 typedef struct s_mini
 {
-    t_gc			*gc;
-    t_amb			amb;
+	t_gc			*gc;
+	t_amb			amb;
 	t_cylin			*cy;
 	t_cam			cam;
-    t_sphere		*sph;
-    char			*file;
-    t_light			light;
-    t_plan			*plane;
-    char			**pars;
-    t_mlx			mlx_utils;
+	t_sphere		*sph;
+	char			*file;
+	t_light			light;
+	t_plan			*plane;
+	char			**pars;
+	t_mlx			mlx_utils;
 
 }					t_mini;
 
@@ -162,4 +162,5 @@ int					hit_plane(t_ray ray, t_plan *plane, t_hit *hit);
 int					hit_cylinder(t_ray ray, t_cylin *cy, t_hit *hit);
 int					hit_sphere(t_ray ray, t_sphere *sphere, t_hit *hit);
 int					find_closest_hit(t_mini *mini, t_ray ray, t_hit *hit);
+t_vec3				add_light_shadow(t_mini *mini, t_hit hit);
 #endif

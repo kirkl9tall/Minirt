@@ -5,11 +5,13 @@ int	is_in_shadow(t_mini *mini, t_vec3 point, t_vec3 normal, t_vec3 *light_dir)
 	t_ray	shadow_ray;
 	t_hit	shadow_hit;
 	double	light_distance;
+	t_vec3	to_light;
 
-	*light_dir = vect_normalized(vect_subs(mini->light.light_point, point));
-	light_distance = sqrt(vect_prod(*light_dir, *light_dir));
-	shadow_ray.direction = vect_normalized(*light_dir);
+	to_light = vect_subs(mini->light.light_point, point);
+	light_distance = sqrt(vect_prod(to_light, to_light));
+	*light_dir = vect_normalized(to_light);
 	shadow_ray.origin = point;
+	shadow_ray.direction = *light_dir;
 	if (find_closest_hit(mini, shadow_ray, &shadow_hit))
 		if (shadow_hit.t < light_distance)
 			return (1);
