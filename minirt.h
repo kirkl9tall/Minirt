@@ -25,7 +25,6 @@
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <string.h> //forbiden memset
 # include <unistd.h>
 
 # define W_W 720
@@ -46,46 +45,46 @@ typedef struct s_amb
 
 typedef struct s_cam
 {
-	t_vec3			pos;
-	t_vec3			orient;
-	t_vec3			up_v;
-	t_vec3			right_v;
 	double			width_canva;
 	double			height_canva;
 	double			fov;
+    t_vec3			pos;
+    t_vec3			orient;
+    t_vec3			up_v;
+    t_vec3			right_v;
 
 }					t_cam;
 
 typedef struct s_light
 {
-	t_vec3			light_point;
+    t_vec3				color;
 	double			lbr;
-	int			color;
+    t_vec3			light_point;
 }					t_light;
 
 typedef struct s_sphere
 {
-	t_vec3			sph_center;
+    t_vec3				color;
 	double			s_diam;
-	int			color;
+    t_vec3			sph_center;
 	struct s_sphere	*next;
 }					t_sphere;
 
 typedef struct s_plan
 {
+    t_vec3				color;
 	t_vec3			cor_plan;
 	t_vec3			nnv_plan;
-	int			color;
 	struct s_plan	*next;
 }					t_plan;
 
 typedef struct s_cylin
 {
-	t_vec3			cy_center;
+    t_vec3				color;
+    double			cy_diam;
+    double			cy_height;
 	t_vec3			nv_cy;
-	double			cy_diam;
-	double			cy_height;
-	int			color;
+    t_vec3			cy_center;
 	struct s_cylin	*next;
 }					t_cylin;
 
@@ -96,68 +95,71 @@ typedef struct s_ray
 }					t_ray;
 typedef struct s_mlx
 {
+    int				bpp;
+    int				endian;
+    int				size_line;
 	void			*mlx;
 	void			*win;
 	void			*img;
 	char			*addr;
-	int				bpp;
-	int				size_line;
-	int				endian;
 }					t_mlx;
 typedef struct s_hit
 {
-    double      t;
-    t_vec3      point;
-    t_vec3      normal;
-    int      color;
-} t_hit;
-
+    t_vec3				color;
+	double			t;
+	t_vec3			point;
+    t_vec3			normal;
+}					t_hit;
 
 typedef struct s_mini
 {
-	t_mlx			mlx_utils;
-	char			**pars;
-	char			*file;
+    t_gc			*gc;
+    t_amb			amb;
 	t_cylin			*cy;
 	t_cam			cam;
-	t_plan			*plane;
-	t_sphere		*sph;
-	t_light			light;
-	t_amb			amb;
-	t_gc			*gc;
+    t_sphere		*sph;
+    char			*file;
+    t_light			light;
+    t_plan			*plane;
+    char			**pars;
+    t_mlx			mlx_utils;
 
 }					t_mini;
 
 //////////////////////////// parsing ////////////////////////////
-int					ft_atoi(char *nptr);
 int					ft_isalpha(int c);
 int					ft_isdigit(int x);
-char				*ft_strdup(char *s, t_gc **gc);
+int					ft_atoi(char *nptr);
 size_t				ft_strlen(char *str);
 int					checker(char *str, int c);
-char				*ft_strjoin(char *s1, char *s2, t_gc **gc);
-char				*ft_strchr(char *str, int c);
 char				*handle_buffer(char **boby);
-char				*get_next_line(int fd, t_gc **gc);
 char				*ft_strldup(char *s, int i);
 int					check_file_mini(char *argv);
-int					init_mini(t_mini *mini, char *title);
+char				*ft_strchr(char *str, int c);
 void				parsing(int fd, t_mini *mini);
-double				ft_atoi_double(char *nptr, double min, double max);
+char				*ft_strdup(char *s, t_gc **gc);
+char				*get_next_line(int fd, t_gc **gc);
+int					init_mini(t_mini *mini, char *title);
 char				**ft_split(char *s, char c, t_gc **gc);
 void				assigner(t_mini *mini, char **splited);
+char				*ft_strjoin(char *s1, char *s2, t_gc **gc);
+double				ft_atoi_double(char *nptr, double min, double max);
 
 ////////////////////////////// camera projection
 
 void				project_camera(t_mini *mini);
 
 ////vect_math//////////////////////////////////
+t_vec3				vect_normalized(t_vec3 v1);
 t_vec3				vect_addi(t_vec3 v1, t_vec3 v2);
 t_vec3				vect_subs(t_vec3 v1, t_vec3 v2);
-t_vec3				vect_multi(t_vec3 v1, double prod);
 double				vect_prod(t_vec3 v1, t_vec3 v2);
 t_vec3				vect_cross(t_vec3 v1, t_vec3 v2);
-t_vec3				vect_normalized(t_vec3 v1);
+t_vec3				vect_multi(t_vec3 v1, double prod);
 ///////////////////////////////////////////////
 void				render_scene(t_mini *mini);
+int					hit_plane(t_ray ray, t_plan *plane, t_hit *hit);
+int					hit_cylinder(t_ray ray, t_cylin *cy, t_hit *hit);
+int					hit_sphere(t_ray ray, t_sphere *sphere, t_hit *hit);
+int					find_closest_hit(t_mini *mini, t_ray ray, t_hit *hit);
 #endif

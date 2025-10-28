@@ -108,7 +108,7 @@ void	assign_a(t_mini *mini, char **splited)
 			error_pinting("Invalid Ambient lighting color format\n");
 		i++;
 	}
-	mini->amb.color = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
+	mini->amb.color = (t_vec3){rgb[0], rgb[1], rgb[2]};
 }
 
 void	assign_c(t_mini *mini, char **splited)
@@ -152,7 +152,7 @@ void	assign_l(t_mini *mini, char **splited)
 			error_pinting("Invalid Ambient lighting color format\n");
 		i++;
 	}
-	mini->light.color = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
+	mini->light.color = (t_vec3){rgb[0], rgb[1], rgb[2]};
 }
 
 void	assign_pl(t_mini *mini, char **splited)
@@ -186,7 +186,7 @@ void	assign_pl(t_mini *mini, char **splited)
 			error_pinting("Invalid Ambient lighting color format\n");
 		i++;
 	}
-	plane->color = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
+	plane->color = (t_vec3){rgb[0], rgb[1], rgb[2]};
 	if (!mini->plane)
 		mini->plane = plane;
 	else
@@ -225,7 +225,7 @@ void	assign_sph(t_mini *mini, char **splited)
 			error_pinting("Invalid Ambient lighting color format\n");
 		i++;
 	}
-	sph->color = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
+	sph->color = (t_vec3){rgb[0], rgb[1], rgb[2]};
 	if (!mini->sph)
 		mini->sph = sph;
 	else
@@ -272,7 +272,7 @@ void	assign_cy(t_mini *mini, char **splited)
 			error_pinting("Invalid Ambient lighting color format\n");
 		i++;
 	}
-	cy->color = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
+	cy->color = (t_vec3){rgb[0], rgb[1], rgb[2]};
 	if (!mini->cy)
 		mini->cy = cy;
 	else
