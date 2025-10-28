@@ -1,13 +1,14 @@
-SRCS = get_next_line_utils.c get_next_line.c utils_pars.c \
-       ft_split.c parsing.c  camera.c vec_maths.c main.c 
+SRCS = GC/gc.c GNL/gnl.c GNL/gnl_utils.c  Render/start_rendering.c \
+	   utils_pars.c \
+       ft_split.c parsing.c camera.c vec_maths.c main.c
 
 OBJS = $(SRCS:.c=.o)
 
-CC      = gcc
-CFLAGS  = -Wall -Wextra -Werror -I. ~/Desktop/minirt/minilibx-linux
-MLX_DIR = ~/Desktop/minirt/minilibx-linux
-LDFLAGS = -L$(MLX_DIR) -L/usr/lib
-LDLIBS  = -lmlx -lXext -lX11 -lm -lz -g
+CC      = cc
+CFLAGS  = -Wall -Wextra -Werror -g -I$(MLX_DIR)
+MLX_DIR = ./minilibx-linux
+LDFLAGS = -L$(MLX_DIR)
+LDLIBS  = -lmlx -lXext -lX11 -lm
 
 RM = rm -rf
 NAME = minirt
@@ -15,7 +16,7 @@ NAME = minirt
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) $(CFLAGS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
+	$(CC) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 
 clean:
 	$(RM) $(OBJS)
@@ -26,3 +27,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: clean all re fclean
+
