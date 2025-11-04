@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: m45kf4c3 <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:58:25 by m45kf4c3          #+#    #+#             */
-/*   Updated: 2025/10/20 15:58:26 by m45kf4c3         ###   ########.fr       */
+/*   Updated: 2025/11/04 14:01:01 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <string.h>
 
-# define W_W 2160
-# define W_H 1080
+# define W_W 800
+# define W_H 600
 
 typedef struct s_vec3
 {
@@ -118,7 +119,7 @@ typedef struct s_mini
 	t_cylin			*cy;
 	t_cam			cam;
 	t_sphere		*sph;
-	char			*file;
+	// char			*file;
 	t_light			light;
 	t_plan			*plane;
 	char			**pars;

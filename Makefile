@@ -1,11 +1,11 @@
 SRCS = GC/gc.c GNL/gnl.c GNL/gnl_utils.c  Render/start_rendering.c \
-	   utils_pars.c \
+	   utils_pars.c Render/shapes.c  Render/rendering_utils.c \
        ft_split.c parsing.c camera.c vec_maths.c main.c
 
 OBJS = $(SRCS:.c=.o)
 
 CC      = cc
-CFLAGS  = -Wall -Wextra -Werror -g -I$(MLX_DIR)
+CFLAGS  =  -g -I$(MLX_DIR)
 MLX_DIR = ./minilibx-linux
 LDFLAGS = -L$(MLX_DIR)
 LDLIBS  = -lmlx -lXext -lX11 -lm

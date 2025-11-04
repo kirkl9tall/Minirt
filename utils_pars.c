@@ -40,44 +40,44 @@ int	ft_isdigit(int x)
 	return (0);
 }
 
-char	*ft_strdup(char *s, t_gc **gc)
-{
-	size_t	len;
-	char	*dup;
-	size_t	i;
+// char	*ft_strdup(char *s, t_gc **gc)
+// {
+// 	size_t	len;
+// 	char	*dup;
+// 	size_t	i;
 
-	if (!s)
-		return (NULL);
-	len = ft_strlen(s) + 1;
-	dup = gc_malloc(gc, len);
-	i = 0;
-	while (s[i])
-	{
-		dup[i] = s[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
-}
+// 	if (!s)
+// 		return (NULL);
+// 	len = ft_strlen(s) + 1;
+// 	dup = gc_malloc(gc, len);
+// 	i = 0;
+// 	while (s[i])
+// 	{
+// 		dup[i] = s[i];
+// 		i++;
+// 	}
+// 	dup[i] = '\0';
+// 	return (dup);
+// }
 
-char	*ft_strjoin(char *s1, char *s2, t_gc **gc)
-{
-	size_t	len1;
-	size_t	len2;
-	char	*res;
-	size_t	i;
+// char	*ft_strjoin(char *s1, char *s2, t_gc **gc)
+// {
+// 	size_t	len1;
+// 	size_t	len2;
+// 	char	*res;
+// 	size_t	i;
 
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	res = gc_malloc(gc, len1 + len2 + 1);
-	i = 0;
-	while (*s1)
-		res[i++] = *s1++;
-	while (*s2)
-		res[i++] = *s2++;
-	res[i] = '\0';
-	return (res);
-}
+// 	len1 = ft_strlen(s1);
+// 	len2 = ft_strlen(s2);
+// 	res = gc_malloc(gc, len1 + len2 + 1);
+// 	i = 0;
+// 	while (*s1)
+// 		res[i++] = *s1++;
+// 	while (*s2)
+// 		res[i++] = *s2++;
+// 	res[i] = '\0';
+// 	return (res);
+// }
 
 // void	read_file(t_fdf *fdf)
 // {
