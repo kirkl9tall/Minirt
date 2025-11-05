@@ -256,9 +256,9 @@ void	assign_cy(t_mini *mini, char **splited)
 	splited_comma = ft_split(splited[2], ',', &mini->gc);
 	if (count_split(splited_comma) != 3)
 		error_pinting("Invalid Ambientlighting color format\n");
-	cy->nv_cy.x = ft_atoi_double(splited_comma[0], 0.0, 1.0);
-	cy->nv_cy.y = ft_atoi_double(splited_comma[1], 0.0, 1.0);
-	cy->nv_cy.z = ft_atoi_double(splited_comma[2], 0.0, 1.0);
+	cy->nv_cy.x = ft_atoi_double(splited_comma[0], -1.0, 1.0);
+	cy->nv_cy.y = ft_atoi_double(splited_comma[1], -1.0, 1.0);
+	cy->nv_cy.z = ft_atoi_double(splited_comma[2], -1.0, 1.0);
 	cy->cy_diam = ft_atoi_double(splited[3], INT_MIN, INT_MAX);
 	cy->cy_height = ft_atoi_double(splited[4], INT_MIN, INT_MAX);
 	cy->next = NULL;

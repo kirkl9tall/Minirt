@@ -93,6 +93,10 @@ int	hit_cylinder(t_ray ray, t_cylin *cy, t_hit *hit)
 	x = x2;
 	if (x < hit->t)
 	{
+		t_vec3 hit_point = vect_addi(ray.origin, vect_multi(ray.direction, x));
+    	double h = vect_prod(vect_subs(hit_point, cy->cy_center), cy->nv_cy);
+    	if (h < 0 || h > cy->cy_height)
+        	return 0;
 		hit->t = x;
 		hit->color = cy->color;
 		cy->nv_cy = vect_normalized(cy->nv_cy);
