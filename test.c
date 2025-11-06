@@ -1,4 +1,4 @@
-#include "minirt.h"
+// #include "minirt.h"
 
 // int	main(void)
 // {
@@ -38,7 +38,7 @@
 // 	mini.sph = malloc(sizeof(t_sphere));
 // 	if (!mini.sph)
 // 		return (1);
-// 	mini.sph->sph_center = (t_vec3){0, 0, 5};
+// 	mini.sph->sph_center = (t_vec3){-2, 1, 5};
 // 	mini.sph->s_diam = 2.0;
 // 	mini.sph->color = (t_vec3){255, 0, 0};
 // 	mini.sph->next = NULL;
@@ -76,22 +76,4 @@
 // 	free(mini.sph);
 // 	free(mini.plane);
 // 	return (0);
-// }
-
-// av = 
-
-
-// int f1(char **s)
-// {
-// 	while(**s)
-// 	{
-// 		(*s)++;
-// 	}
-// }
-// int main (int ac, char *av[])
-
-// {
-// 	printf("%p\n", *av);
-// 	f1(++av);
-// 	printf("%p\n", **av);
 // }

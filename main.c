@@ -124,26 +124,22 @@ int	close_window(t_mini *mini)
 
 int	main(int argc, char *argv[])
 {
-	t_mini	*mini;
-	t_gc	*gc;
+	t_mini	mini;
 	int		fd;
 
 	if (argc == 2)
 	{
 		if (!check_file_mini(argv[1]))
 			return (0);
-		mini = gc_malloc(&gc, sizeof(t_mini));
-		memset(mini, 0, sizeof(t_mini));
-		mini->gc = gc;
-		// mini->file = ft_strdup(argv[1], &gc);
+		memset(&mini, 0, sizeof(t_mini));//TODO ft_memset
 		fd = open(argv[1], O_RDONLY);
-		parsing(fd, mini);
-		if (init_mini(mini, "MiniRT"))
-			return (gc_clean(&gc), 0);
-		project_camera(mini);
-		render_scene(mini); // TODO
+		parsing(fd, &mini);
+		if (init_mini(&mini, "MiniRT"))
+			return (gc_clean(&mini.gc), 0);
+		project_camera(&mini);
+		render_scene(&mini); // TODO
 		// print_scene(mini);
-		mlx_hook(mini->mlx_utils.win, 17, 0, close_window, mini);
-		mlx_loop(mini->mlx_utils.mlx);
+		mlx_hook(mini.mlx_utils.win, 17, 0, close_window, &mini);
+		mlx_loop(mini.mlx_utils.mlx);
 	}
 }

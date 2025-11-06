@@ -164,8 +164,8 @@ void	assign_pl(t_mini *mini, char **splited)
 	t_plan	*trav;
 
 	plane = gc_malloc(&mini->gc, sizeof(t_plan));
-	if (count_split(splited) != 4)
-		error_pinting("Invalid Plane format\n");
+	if (count_split(splited) != 4)//
+		error_pinting("Invalid Plane format\n");//
 	splited_comma = ft_split(splited[1], ',', &mini->gc);
 	plane->cor_plan.x = ft_atoi_double(splited_comma[0], INT_MIN, INT_MAX);
 	plane->cor_plan.y = ft_atoi_double(splited_comma[1], INT_MIN, INT_MAX);

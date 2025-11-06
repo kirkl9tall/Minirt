@@ -7,7 +7,7 @@ t_ray	generate_ray(t_mini *mini, int screen_x, int screen_y)
 	double	vp_y;
 	t_vec3	direction;
 
-	vp_x = (2.0 * ((screen_x + 0.5) / W_W) - 1.0) * (mini->cam.width_canva
+	vp_x = (1 - 2.0 * ((screen_x + 0.5) / W_W)) * (mini->cam.width_canva
 			/ 2.0);
 	vp_y = (1.0 - 2.0 * ((screen_y + 0.5) / W_H)) * (mini->cam.height_canva
 			/ 2.0);
@@ -27,7 +27,7 @@ t_vec3	ray_trace(t_mini *mini, t_ray ray)
 	t_hit	hit;
 
 	if (find_closest_hit(mini, ray, &hit))
-		return (add_light_shadow(mini, hit)); // TODO add light and ambiant
+		return (add_light_shadow(mini, hit));
 	return ((t_vec3){0, 0, 0});
 }
 

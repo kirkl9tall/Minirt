@@ -55,6 +55,11 @@ int	hit_sphere(t_ray ray, t_sphere *sphere, t_hit *hit)
 	return (1);
 }
 
+int caps(t_ray ray, t_cylin *cy, t_hit *hit,t_vec3 *center_cap)
+{
+
+
+}
 int	hit_cylinder(t_ray ray, t_cylin *cy, t_hit *hit)
 {
 	t_vec3	oc;
@@ -104,6 +109,10 @@ int	hit_cylinder(t_ray ray, t_cylin *cy, t_hit *hit)
 		t_vec3 tmp = vect_subs(hit->point, cy->cy_center);
 		t_vec3 proj = vect_multi(cy->nv_cy, vect_prod(cy->nv_cy, tmp));
 		hit->normal = vect_normalized(vect_subs(tmp, proj));
+		t_vec3 cap_top = vect_addi(cy->cy_center,vect_multi(cy->nv_cy,(cy->cy_height/2)));
+		t_vec3 cap_bott = vect_subs(cy->cy_center,vect_multi(cy->nv_cy,(cy->cy_height/2)));
+		caps(ray,cy,hit,&cap_top);
+		//caps()
 		return 1;
 	}
 	return (0);
@@ -146,7 +155,6 @@ int	find_closest_hit(t_mini *mini, t_ray ray, t_hit *hit)
 	}
 	while (current_cylinder)
 	{
-		t_hit temp_hit;
 		temp_hit.t = closest_so_far;
 		if (hit_cylinder(ray, current_cylinder, &temp_hit)
 		&& temp_hit.t < closest_so_far)

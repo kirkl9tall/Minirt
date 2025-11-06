@@ -45,12 +45,16 @@ t_vec3	vect_cross(t_vec3 v1, t_vec3 v2)
 	v.z = v1.x * v2.y - v1.y * v2.x;
 	return (v);
 }
+double vect_len(t_vec3 v1)
+{
+	return(sqrt((v1.x * v1.x) + (v1.y * v1.y) + (v1.z * v1.z)));
+}
 t_vec3	vect_normalized(t_vec3 v1)
 {
 	t_vec3	v;
 	double	len;
 
-	len = sqrt((v1.x * v1.x) + (v1.y * v1.y) + (v1.z * v1.z));
+	len = vect_len(v1);
     if (len < 1e-8)
 		return (v1);
 	v.x = v1.x / len;
