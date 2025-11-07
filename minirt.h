@@ -6,7 +6,7 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:58:25 by m45kf4c3          #+#    #+#             */
-/*   Updated: 2025/11/04 14:01:01 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/07 10:36:02 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,4 +164,5 @@ int					hit_cylinder(t_ray ray, t_cylin *cy, t_hit *hit);
 int					hit_sphere(t_ray ray, t_sphere *sphere, t_hit *hit);
 int					find_closest_hit(t_mini *mini, t_ray ray, t_hit *hit);
 t_vec3				add_light_shadow(t_mini *mini, t_hit hit);
+double				vect_len(t_vec3 v1);
 #endif
