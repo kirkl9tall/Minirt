@@ -47,7 +47,7 @@ int	init_mini(t_mini *mini, char *title)
 }
 int	close_window(t_mini *mini)
 {
-    gc_clean(&mini->gc);
+    // gc_clean(&mini->gc);
 	exit(0);
 }
 
@@ -122,6 +122,15 @@ int	close_window(t_mini *mini)
 // 	printf("===== END SCENE =====\n");
 // }
 
+int	handle_keypress(int keysym, t_mini *fdf)
+{
+	if (keysym == XK_Escape)
+	{
+		// free
+		exit(0);
+	}
+}
+
 int	main(int argc, char *argv[])
 {
 	t_mini	mini;
@@ -131,7 +140,7 @@ int	main(int argc, char *argv[])
 	{
 		if (!check_file_mini(argv[1]))
 			return (0);
-		memset(&mini, 0, sizeof(t_mini));//TODO ft_memset
+		ft_memset(&mini, 0, sizeof(t_mini));//TODO ft_memset
 		fd = open(argv[1], O_RDONLY);
 		parsing(fd, &mini);
 		if (init_mini(&mini, "MiniRT"))
@@ -140,6 +149,7 @@ int	main(int argc, char *argv[])
 		render_scene(&mini); // TODO
 		// print_scene(mini);
 		mlx_hook(mini.mlx_utils.win, 17, 0, close_window, &mini);
+		mlx_key_hook(mini.mlx_utils.win, handle_keypress,&mini);
 		mlx_loop(mini.mlx_utils.mlx);
 	}
 }

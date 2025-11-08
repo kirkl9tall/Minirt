@@ -1,36 +1,28 @@
-# ===== Ambient light =====
-A 0.35 255,255,255           # Slightly stronger ambient light for overall brightness
+A 0.35 255,255,255
 
-# ===== Camera =====
-C 0,6,28   0,0,-1  90        # Wider view to include all planets
+C 0,6,28   0,0,-1  90
 
-# ===== Lights =====
-L 0,10,5   1.0   255,255,200   # Main sunlight
-L -10,6,-5 0.4   150,150,255   # Cool fill light
-L 10,8,-10 0.3   255,180,180   # Warm fill light from right
+L 0,10,5   1.0   255,255,200
+L -10,6,-5 0.4   150,150,255
+L 10,8,-10 0.3   255,180,180
 
-# ===== Background plane =====
-pl 0,-2,0  0,1,0   15,15,25     # Slightly lighter dark blue plane
+pl 0,-2,0  0,1,0   15,15,25
 
-# ===== Sun =====
-sp 0,0,0     3.0   255,220,100  # Bright yellow-orange Sun
+sp 0,0,0     3.0   255,220,100
 
-# ===== Inner Planets =====
-sp 4,0,0      0.5   180,180,180   # Mercury - small gray
-sp 5,0,0      0.8   255,180,0     # Venus - yellow-orange
-sp 6.5,0,0    1.2   0,120,255     # Earth - blue
-sp 8.5,0,0    1.0   255,80,0      # Mars - red-orange
+sp 4,0,0      0.5   180,180,180
+sp 5,0,0      0.8   255,180,0
+sp 6.5,0,0    1.2   0,120,255
+sp 8.5,0,0    1.0   255,80,0
 
-# ===== Outer Planets =====
-sp 12,0,0     2.5   220,160,100   # Jupiter - large brownish
-sp 16,0,0     2.0   255,255,180   # Saturn - pale yellow
-sp 20,0,0     1.6   180,180,255   # Neptune - light blue
+sp 12,0,0     2.5   220,160,100
+sp 16,0,0     2.0   255,255,180
+sp 20,0,0     1.6   180,180,255
 
-# ===== Orbits (thin visible rings) =====
-cy 0,-1.95,0  0,1,0  8   0.05  255,255,255   # Orbit Mercury
-cy 0,-1.95,0  0,1,0  10  0.05  230,230,230   # Orbit Venus
-cy 0,-1.95,0  0,1,0  13  0.05  220,220,220   # Orbit Earth
-cy 0,-1.95,0  0,1,0  17  0.05  200,200,200   # Orbit Mars
-cy 0,-1.95,0  0,1,0  22  0.05  180,180,180   # Orbit Jupiter
-cy 0,-1.95,0  0,1,0  28  0.05  150,150,150   # Orbit Saturn
-cy 0,-1.95,0  0,1,0  35  0.05  120,120,120   # Orbit Neptune
+cy 0,-1.95,0  0,1,0  8   0.05  255,255,255
+cy 0,-1.95,0  0,1,0  10  0.05  230,230,230
+cy 0,-1.95,0  0,1,0  13  0.05  220,220,220
+cy 0,-1.95,0  0,1,0  17  0.05  200,200,200
+cy 0,-1.95,0  0,1,0  22  0.05  180,180,180
+cy 0,-1.95,0  0,1,0  28  0.05  150,150,150
+cy 0,-1.95,0  0,1,0  35  0.05  120,120,120

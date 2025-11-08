@@ -144,13 +144,10 @@ int hit_cylinder(t_ray ray, t_cylin *cy, t_hit *hit)
             hit_body = 1;
         }
     }
-    
     t_vec3 cap_top = vect_addi(cy->cy_center, vect_multi(normalized_axis, (cy->cy_height / 2)));
     t_vec3 cap_bottom = vect_subs(cy->cy_center, vect_multi(normalized_axis, (cy->cy_height / 2)));
-    
     int hit_top = caps(ray, cy, hit, cap_top, 1);
     int hit_bottom = caps(ray, cy, hit, cap_bottom, 0);
-    
     return (hit_body || hit_top || hit_bottom);
 }
 

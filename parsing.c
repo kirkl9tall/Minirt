@@ -208,7 +208,7 @@ void	assign_sph(t_mini *mini, char **splited)
 	i = 0;
 	sph = gc_malloc(&mini->gc, sizeof(t_sphere));
 	if (count_split(splited) != 4)
-		error_pinting("Invalid Plane format\n");
+		error_pinting("Invalid sphere format\n");
 	splited_comma = ft_split(splited[1], ',', &mini->gc);
 	sph->sph_center.x = ft_atoi_double(splited_comma[0], INT_MIN, INT_MAX);
 	sph->sph_center.y = ft_atoi_double(splited_comma[1], INT_MIN, INT_MAX);
@@ -248,7 +248,7 @@ void	assign_cy(t_mini *mini, char **splited)
 	i = 0;
 	cy = gc_malloc(&mini->gc, sizeof(t_cylin));
 	if (count_split(splited) != 6)
-		error_pinting("Invalid Plane format\n");
+		error_pinting("Invalid cylinder format\n");
 	splited_comma = ft_split(splited[1], ',', &mini->gc);
 	cy->cy_center.x = ft_atoi_double(splited_comma[0], INT_MIN, INT_MAX);
 	cy->cy_center.y = ft_atoi_double(splited_comma[1], INT_MIN, INT_MAX);
