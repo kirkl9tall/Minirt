@@ -86,68 +86,72 @@ int caps(t_ray ray, t_cylin *cy, t_hit *hit,t_vec3 center_cap ,int u)
 	}
 	return 0;
 }
+int euqation_cylinder(t_ray ray , t_cylin *cy,t_equa *f)
+{
 
+	cy->oc = vect_subs(ray.origin, cy->cy_center);
+    cy->p = vect_subs(cy->oc, vect_multi(cy->normalized_axis, vect_prod(cy->normalized_axis, cy->oc)));
+    cy->z = vect_subs(ray.direction, vect_multi(cy->normalized_axis, vect_prod(cy->normalized_axis, ray.direction)));
+    f->a = vect_prod(cy->z, cy->z);
+    f->b = 2 * (vect_prod(cy->p, cy->z));
+    f->c = vect_prod(cy->p, cy->p) - ((cy->cy_diam / 2) * (cy->cy_diam / 2));
+    f->delta = f->b * f->b - 4 * (f->a * f->c);
+	if (f->delta < 0)
+        return 0;
+    f->sqrt_d = sqrt(f->delta);
+    f->x1 = (-f->b - f->sqrt_d) / (2.0 * f->a);
+    f->x2 = (-f->b + f->sqrt_d) / (2.0 * f->a);
+    if (f->x1 < 1e-6 && f->x2 < 1e-6)
+        return 0;
+    if (f->x1 > 1e-6 && f->x2 > 1e-6)
+        f->x = fmin(f->x1, f->x2);
+    else if (f->x1 > 1e-6)
+        f->x = f->x1;
+    else
+        f->x = f->x2;
+
+}
 int hit_cylinder(t_ray ray, t_cylin *cy, t_hit *hit)
 {
-    t_vec3 oc;
-    double a;
-    double b;
-    double c;
-    double delta;
-    t_vec3 p;
-    t_vec3 z;
-    double x1;
-    double x2;
-    double x;
-    double sqrt_d;
+	t_equa f;
     int hit_body = 0;
-    t_vec3 normalized_axis = vect_normalized(cy->nv_cy);
-    
-    oc = vect_subs(ray.origin, cy->cy_center);
-    p = vect_subs(oc, vect_multi(normalized_axis, vect_prod(normalized_axis, oc)));
-    z = vect_subs(ray.direction, vect_multi(normalized_axis, vect_prod(normalized_axis, ray.direction)));
-    a = vect_prod(z, z);
-    b = 2 * (vect_prod(p, z));
-    c = vect_prod(p, p) - ((cy->cy_diam / 2) * (cy->cy_diam / 2));
-
-    delta = b * b - 4 * (a * c);
-    if (delta < 0)
-        return 0;
-    
-    sqrt_d = sqrt(delta);
-    x1 = (-b - sqrt_d) / (2.0 * a);
-    x2 = (-b + sqrt_d) / (2.0 * a);
-    
-    if (x1 < 1e-6 && x2 < 1e-6)
-        return 0;
-
-    if (x1 > 1e-6 && x2 > 1e-6)
-        x = fmin(x1, x2);
-    else if (x1 > 1e-6)
-        x = x1;
-    else
-        x = x2;
-    
-    if (x < hit->t)
+	cy->normalized_axis = vect_normalized(cy->nv_cy);
+	double h;
+	if (!euqation_cylinder(ray,cy,&f))
+		return 0;
+    // if (f.delta < 0)
+    //     return 0;
+    // f.sqrt_d = sqrt(f.delta);
+    // f.x1 = (-f.b - f.sqrt_d) / (2.0 * f.a);
+    // f.x2 = (-f.b + f.sqrt_d) / (2.0 * f.a);
+    // if (f.x1 < 1e-6 && f.x2 < 1e-6)
+    //     return 0;
+    // if (f.x1 > 1e-6 && f.x2 > 1e-6)
+    //     f.x = fmin(f.x1, f.x2);
+    // else if (f.x1 > 1e-6)
+    //     f.x = f.x1;
+    // else
+    //     f.x = f.x2;
+    if (f.x < hit->t)
     {
-        t_vec3 hit_point = vect_addi(ray.origin, vect_multi(ray.direction, x));
-        double h = vect_prod(vect_subs(hit_point, cy->cy_center), normalized_axis);
+        cy->hit_point = vect_addi(ray.origin, vect_multi(ray.direction, f.x));
+        h = vect_prod(vect_subs(cy->hit_point, cy->cy_center), cy->normalized_axis);
         
         if (h >= -(cy->cy_height / 2) && h <= (cy->cy_height / 2))
         {
-            hit->t = x;
+            hit->t = f.x;
             hit->color = cy->color;
-            hit->point = hit_point;
-            t_vec3 tmp = vect_subs(hit->point, cy->cy_center);
-            t_vec3 proj = vect_multi(normalized_axis, vect_prod(normalized_axis, tmp));
-            hit->normal = vect_normalized(vect_subs(tmp, proj));
+            hit->point = cy->hit_point;
+            cy->tmp = vect_subs(hit->point, cy->cy_center);
+            cy->proj = vect_multi(cy->normalized_axis, vect_prod(cy->normalized_axis, cy->tmp));
+            hit->normal = vect_normalized(vect_subs(cy->tmp, cy->proj));
             hit_body = 1;
         }
     }
-    t_vec3 cap_top = vect_addi(cy->cy_center, vect_multi(normalized_axis, (cy->cy_height / 2)));
-    t_vec3 cap_bottom = vect_subs(cy->cy_center, vect_multi(normalized_axis, (cy->cy_height / 2)));
-    int hit_top = caps(ray, cy, hit, cap_top, 1);
-    int hit_bottom = caps(ray, cy, hit, cap_bottom, 0);
+    cy->cap_top = vect_addi(cy->cy_center, vect_multi(cy->normalized_axis, (cy->cy_height / 2)));
+    cy->cap_bottom = vect_subs(cy->cy_center, vect_multi(cy->normalized_axis, (cy->cy_height / 2)));
+    int hit_top = caps(ray, cy, hit, cy->cap_top, 1);
+    int hit_bottom = caps(ray, cy, hit, cy->cap_bottom, 0);
     return (hit_body || hit_top || hit_bottom);
 }
 

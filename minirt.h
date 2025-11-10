@@ -6,7 +6,7 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:58:25 by m45kf4c3          #+#    #+#             */
-/*   Updated: 2025/11/08 11:33:40 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/10 14:53:52 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,19 @@ typedef struct s_vec3
 	double			x;
 	double			y;
 	double			z;
-}					t_vec3;
+}	
+				t_vec3;
+typedef struct s_equa
+{
+ double a;
+    double b;
+    double c;
+    double delta;
+	double x1;
+    double x2;
+    double x;
+    double sqrt_d;
+}t_equa;
 
 typedef struct s_amb
 {
@@ -86,6 +98,18 @@ typedef struct s_cylin
 	double			cy_height;
 	t_vec3			nv_cy;
 	t_vec3			cy_center;
+	/// /////
+	t_vec3 normalized_axis;
+    t_vec3 hit_point;
+	t_vec3 tmp;
+	t_vec3 proj;
+	t_vec3 cap_top;
+	t_vec3 cap_bottom;
+	
+	t_vec3 oc;
+	t_equa f;
+    t_vec3 p;
+    t_vec3 z;
 	struct s_cylin	*next;
 }					t_cylin;
 
@@ -166,4 +190,5 @@ int					find_closest_hit(t_mini *mini, t_ray ray, t_hit *hit);
 t_vec3				add_light_shadow(t_mini *mini, t_hit hit);
 double				vect_len(t_vec3 v1);
 void	*ft_memset(void *s, int c, size_t n);
+int euqation_cylinder(t_ray ray , t_cylin *cy,t_equa *f);
 #endif
