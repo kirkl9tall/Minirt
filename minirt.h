@@ -6,7 +6,7 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:58:25 by m45kf4c3          #+#    #+#             */
-/*   Updated: 2025/11/10 14:53:52 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/10 14:57:58 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,12 @@ typedef struct s_cylin
 	t_vec3 proj;
 	t_vec3 cap_top;
 	t_vec3 cap_bottom;
-	
 	t_vec3 oc;
 	t_equa f;
     t_vec3 p;
     t_vec3 z;
+	int hit_top;
+	int hit_bottom;
 	struct s_cylin	*next;
 }					t_cylin;
 

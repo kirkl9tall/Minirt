@@ -88,7 +88,6 @@ int caps(t_ray ray, t_cylin *cy, t_hit *hit,t_vec3 center_cap ,int u)
 }
 int euqation_cylinder(t_ray ray , t_cylin *cy,t_equa *f)
 {
-
 	cy->oc = vect_subs(ray.origin, cy->cy_center);
     cy->p = vect_subs(cy->oc, vect_multi(cy->normalized_axis, vect_prod(cy->normalized_axis, cy->oc)));
     cy->z = vect_subs(ray.direction, vect_multi(cy->normalized_axis, vect_prod(cy->normalized_axis, ray.direction)));
@@ -114,29 +113,15 @@ int euqation_cylinder(t_ray ray , t_cylin *cy,t_equa *f)
 int hit_cylinder(t_ray ray, t_cylin *cy, t_hit *hit)
 {
 	t_equa f;
-    int hit_body = 0;
+    int hit_body;
 	cy->normalized_axis = vect_normalized(cy->nv_cy);
 	double h;
 	if (!euqation_cylinder(ray,cy,&f))
 		return 0;
-    // if (f.delta < 0)
-    //     return 0;
-    // f.sqrt_d = sqrt(f.delta);
-    // f.x1 = (-f.b - f.sqrt_d) / (2.0 * f.a);
-    // f.x2 = (-f.b + f.sqrt_d) / (2.0 * f.a);
-    // if (f.x1 < 1e-6 && f.x2 < 1e-6)
-    //     return 0;
-    // if (f.x1 > 1e-6 && f.x2 > 1e-6)
-    //     f.x = fmin(f.x1, f.x2);
-    // else if (f.x1 > 1e-6)
-    //     f.x = f.x1;
-    // else
-    //     f.x = f.x2;
     if (f.x < hit->t)
     {
         cy->hit_point = vect_addi(ray.origin, vect_multi(ray.direction, f.x));
         h = vect_prod(vect_subs(cy->hit_point, cy->cy_center), cy->normalized_axis);
-        
         if (h >= -(cy->cy_height / 2) && h <= (cy->cy_height / 2))
         {
             hit->t = f.x;
@@ -150,9 +135,9 @@ int hit_cylinder(t_ray ray, t_cylin *cy, t_hit *hit)
     }
     cy->cap_top = vect_addi(cy->cy_center, vect_multi(cy->normalized_axis, (cy->cy_height / 2)));
     cy->cap_bottom = vect_subs(cy->cy_center, vect_multi(cy->normalized_axis, (cy->cy_height / 2)));
-    int hit_top = caps(ray, cy, hit, cy->cap_top, 1);
-    int hit_bottom = caps(ray, cy, hit, cy->cap_bottom, 0);
-    return (hit_body || hit_top || hit_bottom);
+    cy->hit_top = caps(ray, cy, hit, cy->cap_top, 1);
+    cy->hit_bottom = caps(ray, cy, hit, cy->cap_bottom, 0);
+    return (hit_body || cy->hit_top || cy->hit_bottom);
 }
 
 int	find_closest_hit(t_mini *mini, t_ray ray, t_hit *hit)
