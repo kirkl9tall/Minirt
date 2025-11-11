@@ -147,7 +147,6 @@ int	main(int argc, char *argv[])
 			return (gc_clean(&mini.gc), 0);
 		project_camera(&mini);
 		render_scene(&mini); // TODO
-		// print_scene(mini);
 		mlx_hook(mini.mlx_utils.win, 17, 0, close_window, &mini);
 		mlx_key_hook(mini.mlx_utils.win, handle_keypress,&mini);
 		mlx_loop(mini.mlx_utils.mlx);

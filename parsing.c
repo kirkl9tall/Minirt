@@ -33,36 +33,19 @@ void	cleaner_exit(void)
 	printf("error error error\n");
 	exit(1);
 }
-
-double	ft_atoi_double(char *nptr, double min, double max)
+double  atoi_loop(char *nptr,double num)
 {
-	int		x;
-	int		signe;
-	double	num;
-	double	decimal_place;
-	int		found_dot;
+	int x;
+	int found_dot;
+	double decimal_place;
 
+	x = 0;
 	decimal_place = 1;
 	found_dot = 0;
-	x = 0;
-	signe = 1;
-	num = 0;
-	while (nptr[x] == '\t' || nptr[x] == ' ' || (nptr[x] >= 9 && nptr[x] <= 13))
-		x++;
-	if (nptr[x] == '+' || nptr[x] == '-')
-	{
-		if (nptr[x] == '-')
-		{
-			signe *= -1;
-		}
-		x++;
-	}
 	while ((nptr[x] >= '0' && nptr[x] <= '9') || nptr[x] == '.')
 	{
 		if (nptr[x] == '.')
-		{
 			found_dot = 1;
-		}
 		else
 		{
 			if (!found_dot)
@@ -75,11 +58,28 @@ double	ft_atoi_double(char *nptr, double min, double max)
 		}
 		x++;
 	}
-	if ((num * signe) < min || (num * signe) > max)
+	return (num);
+}
+double	ft_atoi_double(char *nptr, double min, double max)
+{
+	int		x;
+	int		signe;
+	double	num;
+
+	x = 0;
+	signe = 1;
+	num = 0;
+	while (nptr[x] == '\t' || nptr[x] == ' ' || (nptr[x] >= 9 && nptr[x] <= 13))
+		x++;
+	if (nptr[x] == '+' || nptr[x] == '-')
 	{
-		// printf(" num is : %lf ",(num * signe));
-		cleaner_exit();
+		if (nptr[x] == '-')
+			signe *= -1;
+		x++;
 	}
+	num = atoi_loop(&nptr[x],num);
+	if ((num * signe) < min || (num * signe) > max)
+		cleaner_exit();
 	return (num * signe);
 }
 
@@ -155,15 +155,8 @@ void	assign_l(t_mini *mini, char **splited)
 	mini->light.color = (t_vec3){rgb[0], rgb[1], rgb[2]};
 }
 
-void	assign_pl(t_mini *mini, char **splited)
+void assign_params_pl(t_plan *plane ,char **splited, t_mini *mini, char **splited_comma)
 {
-	t_plan	*plane;
-	int		rgb[3];
-	char	**splited_comma;
-	int		i;
-	t_plan	*trav;
-
-	plane = gc_malloc(&mini->gc, sizeof(t_plan));
 	if (count_split(splited) != 4)//
 		error_pinting("Invalid Plane format\n");//
 	splited_comma = ft_split(splited[1], ',', &mini->gc);
@@ -175,6 +168,30 @@ void	assign_pl(t_mini *mini, char **splited)
 	plane->nnv_plan.y = ft_atoi_double(splited_comma[1], 0.0, 1.0);
 	plane->nnv_plan.z = ft_atoi_double(splited_comma[2], 0.0, 1.0);
 	plane->next = NULL;
+}
+void past_pl(t_mini *mini, t_plan *plane)
+{
+	t_plan	*trav;
+	if (!mini->plane)
+		mini->plane = plane;
+	else
+	{
+		trav = mini->plane;
+		while (trav->next)
+			trav = trav->next;
+		trav->next = plane;
+	}
+}
+void	assign_pl(t_mini *mini, char **splited)
+{
+	t_plan	*plane;
+	int		rgb[3];
+	char	**splited_comma;
+	int		i;
+	t_plan	*trav;
+
+	plane = gc_malloc(&mini->gc, sizeof(t_plan));
+	assign_params_pl(plane,splited,mini,splited_comma);
 	splited_comma = ft_split(splited[3], ',', &mini->gc);
 	if (count_split(splited_comma) != 3)
 		error_pinting("Invalid Ambient lighting color format\n");
@@ -187,14 +204,31 @@ void	assign_pl(t_mini *mini, char **splited)
 		i++;
 	}
 	plane->color = (t_vec3){rgb[0], rgb[1], rgb[2]};
-	if (!mini->plane)
-		mini->plane = plane;
+	past_pl(mini,plane);
+
+}
+void assign_params_sph(t_sphere *sph ,char **splited, t_mini *mini, char **splited_comma)
+{
+if (count_split(splited) != 4)
+		error_pinting("Invalid sphere format\n");
+	splited_comma = ft_split(splited[1], ',', &mini->gc);
+	sph->sph_center.x = ft_atoi_double(splited_comma[0], INT_MIN, INT_MAX);
+	sph->sph_center.y = ft_atoi_double(splited_comma[1], INT_MIN, INT_MAX);
+	sph->sph_center.z = ft_atoi_double(splited_comma[2], INT_MIN, INT_MAX);
+	sph->s_diam = ft_atoi_double(splited[2], INT_MIN, INT_MAX);
+	sph->next = NULL;
+}
+void past_sph(t_mini *mini, t_sphere *sph)
+{
+	t_sphere	*trav;
+	if (!mini->sph)
+		mini->sph = sph;
 	else
 	{
-		trav = mini->plane;
+		trav = mini->sph;
 		while (trav->next)
 			trav = trav->next;
-		trav->next = plane;
+		trav->next = sph;
 	}
 }
 void	assign_sph(t_mini *mini, char **splited)
@@ -207,14 +241,7 @@ void	assign_sph(t_mini *mini, char **splited)
 
 	i = 0;
 	sph = gc_malloc(&mini->gc, sizeof(t_sphere));
-	if (count_split(splited) != 4)
-		error_pinting("Invalid sphere format\n");
-	splited_comma = ft_split(splited[1], ',', &mini->gc);
-	sph->sph_center.x = ft_atoi_double(splited_comma[0], INT_MIN, INT_MAX);
-	sph->sph_center.y = ft_atoi_double(splited_comma[1], INT_MIN, INT_MAX);
-	sph->sph_center.z = ft_atoi_double(splited_comma[2], INT_MIN, INT_MAX);
-	sph->s_diam = ft_atoi_double(splited[2], INT_MIN, INT_MAX);
-	sph->next = NULL;
+	assign_params_sph(sph,splited,mini,splited_comma);
 	splited_comma = ft_split(splited[3], ',', &mini->gc);
 	if (count_split(splited_comma) != 3)
 		error_pinting("Invalid Ambient lighting color format\n");
@@ -226,27 +253,10 @@ void	assign_sph(t_mini *mini, char **splited)
 		i++;
 	}
 	sph->color = (t_vec3){rgb[0], rgb[1], rgb[2]};
-	if (!mini->sph)
-		mini->sph = sph;
-	else
-	{
-		trav = mini->sph;
-		while (trav->next)
-			trav = trav->next;
-		trav->next = sph;
-	}
+	past_sph(mini,sph);
 }
-
-void	assign_cy(t_mini *mini, char **splited)
+void assign_params_cy(t_cylin *cy,char **splited, t_mini *mini, char **splited_comma)
 {
-	t_cylin	*cy;
-	int		rgb[3];
-	char	**splited_comma;
-	int		i;
-	t_cylin	*trav;
-
-	i = 0;
-	cy = gc_malloc(&mini->gc, sizeof(t_cylin));
 	if (count_split(splited) != 6)
 		error_pinting("Invalid cylinder format\n");
 	splited_comma = ft_split(splited[1], ',', &mini->gc);
@@ -262,6 +272,32 @@ void	assign_cy(t_mini *mini, char **splited)
 	cy->cy_diam = ft_atoi_double(splited[3], INT_MIN, INT_MAX);
 	cy->cy_height = ft_atoi_double(splited[4], INT_MIN, INT_MAX);
 	cy->next = NULL;
+}
+void past_cy(t_mini *mini, t_cylin *cy)
+{
+	t_cylin	*trav;
+	if (!mini->cy)
+		mini->cy = cy;
+	else
+	{
+		trav = mini->cy;
+		while (trav->next)
+			trav = trav->next;
+		trav->next = cy;
+	}
+}
+
+void	assign_cy(t_mini *mini, char **splited)
+{
+	t_cylin	*cy;
+	int		rgb[3];
+	char	**splited_comma;
+	int		i;
+	t_cylin	*trav;
+
+	i = 0;
+	cy = gc_malloc(&mini->gc, sizeof(t_cylin));
+	assign_params_cy(cy,splited,mini,splited_comma);
 	splited_comma = ft_split(splited[5], ',', &mini->gc);
 	if (count_split(splited_comma) != 3)
 		error_pinting("Invalid Ambientlighting color format\n");
@@ -273,15 +309,7 @@ void	assign_cy(t_mini *mini, char **splited)
 		i++;
 	}
 	cy->color = (t_vec3){rgb[0], rgb[1], rgb[2]};
-	if (!mini->cy)
-		mini->cy = cy;
-	else
-	{
-		trav = mini->cy;
-		while (trav->next)
-			trav = trav->next;
-		trav->next = cy;
-	}
+	past_cy(mini,cy);
 }
 
 void	assigner(t_mini *mini, char **splited)

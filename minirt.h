@@ -6,7 +6,7 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:58:25 by m45kf4c3          #+#    #+#             */
-/*   Updated: 2025/11/10 14:57:58 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/11 16:17:15 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,4 +192,10 @@ t_vec3				add_light_shadow(t_mini *mini, t_hit hit);
 double				vect_len(t_vec3 v1);
 void	*ft_memset(void *s, int c, size_t n);
 int euqation_cylinder(t_ray ray , t_cylin *cy,t_equa *f);
+void assign_params_cy(t_cylin *cy,char **splited, t_mini *mini, char **splited_comma);
+void past_cy(t_mini *mini, t_cylin *cy);
+void past_pl(t_mini *mini, t_plan *plane);
+void assign_params_pl(t_plan *plane ,char **splited, t_mini *mini, char **splited_comma);
+
+
 #endif
