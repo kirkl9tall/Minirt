@@ -6,7 +6,7 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:58:25 by m45kf4c3          #+#    #+#             */
-/*   Updated: 2025/11/11 16:17:15 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/12 13:56:59 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,18 @@ void assign_params_cy(t_cylin *cy,char **splited, t_mini *mini, char **splited_c
 void past_cy(t_mini *mini, t_cylin *cy);
 void past_pl(t_mini *mini, t_plan *plane);
 void assign_params_pl(t_plan *plane ,char **splited, t_mini *mini, char **splited_comma);
-
+int	count_split(char **splited);
+void	assign_cy(t_mini *mini, char **splited);
+void	past_cy(t_mini *mini, t_cylin *cy);
+int	ft_strcmp(const char *s1, const char *s2);
+void	cleaner_exit(void);
+double	atoi_loop(char *nptr, double num);
+void	error_pinting(char *error);
+void	assign_a(t_mini *mini, char **splited);
+void	assign_c(t_mini *mini, char **splited);
+void	assign_l(t_mini *mini, char **splited);
+void	assign_pl(t_mini *mini, char **splited);
+void	assign_sph(t_mini *mini, char **splited);
+void	past_sph(t_mini *mini, t_sphere *sph);
 
 #endif
