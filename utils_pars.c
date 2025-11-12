@@ -1,10 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_pars.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/12 14:08:38 by abismail          #+#    #+#             */
+/*   Updated: 2025/11/12 14:09:29 by abismail         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 int	ft_atoi(char *nptr)
 {
 	int	signe;
 	int	num;
-	int x = 0;
+	int	x;
+
+	x = 0;
 	signe = 1;
 	num = 0;
 	while (nptr[x] == '\t' || nptr[x] == ' ' || (nptr[x] >= 9 && nptr[x] <= 13))
@@ -39,6 +53,7 @@ int	ft_isdigit(int x)
 		return (2048);
 	return (0);
 }
+
 void	*ft_memset(void *s, int c, size_t n)
 {
 	size_t	x;

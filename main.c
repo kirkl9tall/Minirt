@@ -47,80 +47,8 @@ int	init_mini(t_mini *mini, char *title)
 }
 int	close_window(t_mini *mini)
 {
-    // gc_clean(&mini->gc);
 	exit(0);
 }
-
-// void	print_scene(t_mini *mini)
-// {
-// 	t_sphere	*s;
-// 	int			i;
-// 	t_plan		*p;
-// 	t_cylin		*c;
-
-// 	printf("===== DEBUG SCENE =====\n\n");
-// 	// Ambient
-// 	printf("Ambient:\n");
-// 	printf("  ratio = %.2f, color = %d\n\n", mini->amb.alr, mini->amb.color);
-// 	// Camera
-// 	printf("Camera:\n");
-// 	printf("  pos     = (%.2f, %.2f, %.2f)\n", mini->cam.pos.x, mini->cam.pos.y,
-// 			mini->cam.pos.z);
-// 	printf("  orient  = (%.2f, %.2f, %.2f)\n", mini->cam.orient.x,
-// 			mini->cam.orient.y, mini->cam.orient.z);
-// 	printf("  up_v    = (%.2f, %.2f, %.2f)\n", mini->cam.up_v.x,
-// 			mini->cam.up_v.y, mini->cam.up_v.z);
-// 	printf("  right_v = (%.2f, %.2f, %.2f)\n", mini->cam.right_v.x,
-// 			mini->cam.right_v.y, mini->cam.right_v.z);
-// 	printf("  fov     = %.2f\n", mini->cam.fov);
-// 	printf("  canvas  = %.2f x %.2f\n\n", mini->cam.width_canva,
-// 			mini->cam.height_canva);
-// 	// Light
-// 	printf("Light:\n");
-// 	printf("  pos   = (%.2f, %.2f, %.2f)\n", mini->light.light_point.x,
-// 			mini->light.light_point.y, mini->light.light_point.z);
-// 	printf("  ratio = %.2f, color = %d\n\n", mini->light.lbr,
-// 			mini->light.color);
-// 	// Spheres
-// 	s = mini->sph;
-// 	i = 0;
-// 	while (s)
-// 	{
-// 		printf("Sphere %d:\n", i++);
-// 		printf("  center = (%.2f, %.2f, %.2f)\n", s->sph_center.x,
-// 				s->sph_center.y, s->sph_center.z);
-// 		printf("  diam   = %.2f, color = %d\n\n", s->s_diam, s->color);
-// 		s = s->next;
-// 	}
-// 	// Planes
-// 	p = mini->plane;
-// 	i = 0;
-// 	while (p)
-// 	{
-// 		printf("Plane %d:\n", i++);
-// 		printf("  point  = (%.2f, %.2f, %.2f)\n", p->cor_plan.x, p->cor_plan.y,
-// 				p->cor_plan.z);
-// 		printf("  normal = (%.2f, %.2f, %.2f)\n", p->nnv_plan.x, p->nnv_plan.y,
-// 				p->nnv_plan.z);
-// 		printf("  color  = %d\n\n", p->color);
-// 		p = p->next;
-// 	}
-// 	// Cylinders
-// 	c = mini->cy;
-// 	i = 0;
-// 	while (c)
-// 	{
-// 		printf("Cylinder %d:\n", i++);
-// 		printf("  center = (%.2f, %.2f, %.2f)\n", c->cy_center.x,
-// 				c->cy_center.y, c->cy_center.z);
-// 		printf("  axis   = (%.2f, %.2f, %.2f)\n", c->nv_cy.x, c->nv_cy.y,
-// 				c->nv_cy.z);
-// 		printf("  diam   = %.2f, height = %.2f, color = %d\n\n", c->cy_diam,
-// 				c->cy_height, c->color);
-// 		c = c->next;
-// 	}
-// 	printf("===== END SCENE =====\n");
-// }
 
 int	handle_keypress(int keysym, t_mini *fdf)
 {

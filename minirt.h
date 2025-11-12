@@ -6,7 +6,7 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:58:25 by m45kf4c3          #+#    #+#             */
-/*   Updated: 2025/11/12 13:59:55 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/12 14:11:43 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,5 +203,4 @@ void	assign_l(t_mini *mini, char **splited);
 void	assign_pl(t_mini *mini, char **splited);
 void	assign_sph(t_mini *mini, char **splited);
 void	past_sph(t_mini *mini, t_sphere *sph);
-
 #endif
