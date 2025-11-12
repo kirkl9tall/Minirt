@@ -139,55 +139,54 @@ int hit_cylinder(t_ray ray, t_cylin *cy, t_hit *hit)
 	norm_v1(cy, ray, hit);
     return (hit_body || cy->hit_top || cy->hit_bottom);
 }
-
+void init_v2(t_mini *mini, t_fch *t)
+{
+	t->current_cylinder = mini->cy;
+	t->hit_anything = 0;
+	t->closest_so_far = INFINITY;
+	t->current_sph = mini->sph;
+	t->current_plane = mini->plane;
+}
 int	find_closest_hit(t_mini *mini, t_ray ray, t_hit *hit)
 {
-	int			hit_anything;
-	double		closest_so_far;
-	t_hit		temp_hit;
-	t_sphere	*current_sph;
-	t_plan		*current_plane;
-	t_cylin		*current_cylinder;
-	current_cylinder = mini->cy;
-	hit_anything = 0;
-	closest_so_far = INFINITY;
-	current_sph = mini->sph;
-	while (current_sph)
+	t_fch t;
+
+	init_v2(mini, &t);
+	while (t.current_sph)
 	{
-		if (hit_sphere(ray, current_sph, &temp_hit)
-			&& temp_hit.t < closest_so_far)
+		if (hit_sphere(ray, t.current_sph, &t.temp_hit)
+			&& t.temp_hit.t < t.closest_so_far)
 		{
-			closest_so_far = temp_hit.t;
-			*hit = temp_hit;
-			hit_anything = 1;
+			t.closest_so_far = t.temp_hit.t;
+			*hit = t.temp_hit;
+			t.hit_anything = 1;
 		}
-		current_sph = current_sph->next;
+		t.current_sph = t.current_sph->next;
 	}
-	current_plane = mini->plane;
-	while (current_plane)
+	while (t.current_plane)
 	{
-		if (hit_plane(ray, current_plane, &temp_hit)
-			&& temp_hit.t < closest_so_far)
+		if (hit_plane(ray, t.current_plane, &t.temp_hit)
+			&& t.temp_hit.t < t.closest_so_far)
 		{
-			closest_so_far = temp_hit.t;
-			*hit = temp_hit;
-			hit_anything = 1;
+			t.closest_so_far = t.temp_hit.t;
+			*hit = t.temp_hit;
+			t.hit_anything = 1;
 		}
-		current_plane = current_plane->next;
+		t.current_plane = t.current_plane->next;
 	}
-	while (current_cylinder)
+	while (t.current_cylinder)
 	{
-		temp_hit.t = closest_so_far;
-		if (hit_cylinder(ray, current_cylinder, &temp_hit)
-		&& temp_hit.t < closest_so_far)
+		t.temp_hit.t = t.closest_so_far;
+		if (hit_cylinder(ray, t.current_cylinder, &t.temp_hit)
+		&& t.temp_hit.t < t.closest_so_far)
 		{
-			closest_so_far = temp_hit.t;
-			*hit = temp_hit;
-			hit_anything = 1;
+			t.closest_so_far = t.temp_hit.t;
+			*hit = t.temp_hit;
+			t.hit_anything = 1;
 		}
-		current_cylinder = current_cylinder->next;
+		t.current_cylinder = t.current_cylinder->next;
 	}
-	return (hit_anything);
+	return (t.hit_anything);
 }
 
 

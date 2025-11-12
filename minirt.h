@@ -6,7 +6,7 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:58:25 by m45kf4c3          #+#    #+#             */
-/*   Updated: 2025/11/12 18:58:11 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/12 19:15:39 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 
 # define W_W 800
 # define W_H 600
+
 
 typedef struct s_vec3
 {
@@ -65,7 +66,7 @@ typedef struct s_cam
 	t_vec3			orient;
 	t_vec3			up_v;
 	t_vec3			right_v;
-
+	
 }					t_cam;
 
 typedef struct s_light
@@ -136,6 +137,15 @@ typedef struct s_hit
 	t_vec3			normal;
 }					t_hit;
 
+typedef struct s_fch
+{
+	int			hit_anything;
+	double		closest_so_far;
+	t_hit		temp_hit;
+	t_sphere	*current_sph;
+	t_plan		*current_plane;
+	t_cylin		*current_cylinder;
+}					t_fch;
 typedef struct s_mini
 {
 	t_gc			*gc;
