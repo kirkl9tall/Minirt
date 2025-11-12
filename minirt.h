@@ -6,7 +6,7 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:58:25 by m45kf4c3          #+#    #+#             */
-/*   Updated: 2025/11/12 13:56:59 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/12 13:59:55 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,19 +170,13 @@ char				**ft_split(char *s, char c, t_gc **gc);
 void				assigner(t_mini *mini, char **splited);
 char				*ft_strjoin(char *s1, char *s2, t_gc **gc);
 double				ft_atoi_double(char *nptr, double min, double max);
-
-////////////////////////////// camera projection
-
 void				project_camera(t_mini *mini);
-
-////vect_math//////////////////////////////////
 t_vec3				vect_normalized(t_vec3 v1);
 t_vec3				vect_addi(t_vec3 v1, t_vec3 v2);
 t_vec3				vect_subs(t_vec3 v1, t_vec3 v2);
 double				vect_prod(t_vec3 v1, t_vec3 v2);
 t_vec3				vect_cross(t_vec3 v1, t_vec3 v2);
 t_vec3				vect_multi(t_vec3 v1, double prod);
-///////////////////////////////////////////////
 void				render_scene(t_mini *mini);
 int					hit_plane(t_ray ray, t_plan *plane, t_hit *hit);
 int					hit_cylinder(t_ray ray, t_cylin *cy, t_hit *hit);
