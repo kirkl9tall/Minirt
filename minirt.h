@@ -6,7 +6,7 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:58:25 by m45kf4c3          #+#    #+#             */
-/*   Updated: 2025/11/12 14:11:43 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/12 18:58:11 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <unistd.h>
 # include <string.h>
+# include <unistd.h>
 
 # define W_W 800
 # define W_H 600
@@ -36,19 +36,19 @@ typedef struct s_vec3
 	double			x;
 	double			y;
 	double			z;
-}	
-				t_vec3;
+}					t_vec3;
 typedef struct s_equa
 {
- double a;
-    double b;
-    double c;
-    double delta;
-	double x1;
-    double x2;
-    double x;
-    double sqrt_d;
-}t_equa;
+	t_vec3 			oc;
+	double			a;
+	double			b;
+	double			c;
+	double			delta;
+	double			x1;
+	double			x2;
+	double			x;
+	double			sqrt_d;
+}					t_equa;
 
 typedef struct s_amb
 {
@@ -70,15 +70,15 @@ typedef struct s_cam
 
 typedef struct s_light
 {
-	t_vec3			color;
 	double			lbr;
+	t_vec3			color;
 	t_vec3			light_point;
 }					t_light;
 
 typedef struct s_sphere
 {
-	t_vec3			color;
 	double			s_diam;
+	t_vec3			color;
 	t_vec3			sph_center;
 	struct s_sphere	*next;
 }					t_sphere;
@@ -93,24 +93,23 @@ typedef struct s_plan
 
 typedef struct s_cylin
 {
-	t_vec3			color;
+	int				hit_top;
+	int				hit_bottom;
 	double			cy_diam;
 	double			cy_height;
+	t_vec3			z;
+	t_equa			f;
+	t_vec3			p;
+	t_vec3			oc;
+	t_vec3			tmp;
+	t_vec3			proj;
+	t_vec3			color;
 	t_vec3			nv_cy;
+	t_vec3			cap_top;
 	t_vec3			cy_center;
-	/// /////
-	t_vec3 normalized_axis;
-    t_vec3 hit_point;
-	t_vec3 tmp;
-	t_vec3 proj;
-	t_vec3 cap_top;
-	t_vec3 cap_bottom;
-	t_vec3 oc;
-	t_equa f;
-    t_vec3 p;
-    t_vec3 z;
-	int hit_top;
-	int hit_bottom;
+	t_vec3			hit_point;
+	t_vec3			cap_bottom;
+	t_vec3			normalized_axis;
 	struct s_cylin	*next;
 }					t_cylin;
 
@@ -144,7 +143,6 @@ typedef struct s_mini
 	t_cylin			*cy;
 	t_cam			cam;
 	t_sphere		*sph;
-	// char			*file;
 	t_light			light;
 	t_plan			*plane;
 	char			**pars;
@@ -184,23 +182,25 @@ int					hit_sphere(t_ray ray, t_sphere *sphere, t_hit *hit);
 int					find_closest_hit(t_mini *mini, t_ray ray, t_hit *hit);
 t_vec3				add_light_shadow(t_mini *mini, t_hit hit);
 double				vect_len(t_vec3 v1);
-void	*ft_memset(void *s, int c, size_t n);
-int euqation_cylinder(t_ray ray , t_cylin *cy,t_equa *f);
-void assign_params_cy(t_cylin *cy,char **splited, t_mini *mini, char **splited_comma);
-void past_cy(t_mini *mini, t_cylin *cy);
-void past_pl(t_mini *mini, t_plan *plane);
-void assign_params_pl(t_plan *plane ,char **splited, t_mini *mini, char **splited_comma);
-int	count_split(char **splited);
-void	assign_cy(t_mini *mini, char **splited);
-void	past_cy(t_mini *mini, t_cylin *cy);
-int	ft_strcmp(const char *s1, const char *s2);
-void	cleaner_exit(void);
-double	atoi_loop(char *nptr, double num);
-void	error_pinting(char *error);
-void	assign_a(t_mini *mini, char **splited);
-void	assign_c(t_mini *mini, char **splited);
-void	assign_l(t_mini *mini, char **splited);
-void	assign_pl(t_mini *mini, char **splited);
-void	assign_sph(t_mini *mini, char **splited);
-void	past_sph(t_mini *mini, t_sphere *sph);
+void				*ft_memset(void *s, int c, size_t n);
+int					euqation_cylinder(t_ray ray, t_cylin *cy, t_equa *f);
+void				assign_params_cy(t_cylin *cy, char **splited, t_mini *mini,
+						char **splited_comma);
+void				past_cy(t_mini *mini, t_cylin *cy);
+void				past_pl(t_mini *mini, t_plan *plane);
+void				assign_params_pl(t_plan *plane, char **splited,
+						t_mini *mini, char **splited_comma);
+int					count_split(char **splited);
+void				assign_cy(t_mini *mini, char **splited);
+void				past_cy(t_mini *mini, t_cylin *cy);
+int					ft_strcmp(const char *s1, const char *s2);
+void				cleaner_exit(void);
+double				atoi_loop(char *nptr, double num);
+void				error_pinting(char *error);
+void				assign_a(t_mini *mini, char **splited);
+void				assign_c(t_mini *mini, char **splited);
+void				assign_l(t_mini *mini, char **splited);
+void				assign_pl(t_mini *mini, char **splited);
+void				assign_sph(t_mini *mini, char **splited);
+void				past_sph(t_mini *mini, t_sphere *sph);
 #endif
