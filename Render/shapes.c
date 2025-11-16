@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zatais <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 16:07:26 by zatais            #+#    #+#             */
-/*   Updated: 2025/11/16 16:07:26 by zatais           ###   ########.fr       */
+/*   Updated: 2025/11/16 16:25:42 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	hit_sphere(t_ray ray, t_sphere *sphere, t_hit *hit)
 	return (1);
 }
 
-int	caps(t_ray ray, t_cylin *cy, t_hit *hit, t_vec3 center_cap, int u)
+int	caps(t_ray ray, t_cylin *cy, t_hit *hit, t_vec3 center_cap)
 {
 	double	t;
 	double	denominator;
@@ -79,7 +79,7 @@ int	caps(t_ray ray, t_cylin *cy, t_hit *hit, t_vec3 center_cap, int u)
 		hit->t = t;
 		hit->point = hit_point;
 		hit->normal = vect_normalized(vect_multi(cy->nv_cy, -1));
-		if (u == 1)
+		if (cy->u_cap == 1)
 			hit->normal = vect_normalized(cy->nv_cy);
 		hit->color = cy->color;
 		return (1);

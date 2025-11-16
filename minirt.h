@@ -6,7 +6,7 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:58:25 by m45kf4c3          #+#    #+#             */
-/*   Updated: 2025/11/12 19:15:39 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/16 16:25:23 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct s_cylin
 	t_vec3			hit_point;
 	t_vec3			cap_bottom;
 	t_vec3			normalized_axis;
+	int				u_cap;
 	struct s_cylin	*next;
 }					t_cylin;
 
@@ -212,8 +213,8 @@ void				assign_l(t_mini *mini, char **splited);
 void				assign_pl(t_mini *mini, char **splited);
 void				assign_sph(t_mini *mini, char **splited);
 void				past_sph(t_mini *mini, t_sphere *sph);
-int					caps(t_ray ray, t_cylin *cy, t_hit *hit, t_vec3 center_cap,
-						int u);
+int					caps(t_ray ray, t_cylin *cy, t_hit *hit, t_vec3 center_cap);
 void				init(t_hit *hit, t_equa f, t_cylin *cy);
 void				norm_v1(t_cylin *cy, t_ray ray, t_hit *hit);
+
 #endif
