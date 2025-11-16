@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
-
 #ifndef GC_H
 # define GC_H
+
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct s_gc
 {

@@ -1,4 +1,4 @@
-SRCS = GC/gc.c GNL/gnl.c GNL/gnl_utils.c  Render/start_rendering.c \
+SRCS = gc/gc.c gnl/gnl.c gnl/gnl_utils.c  Render/start_rendering.c \
 	   pars_maths/utils_pars.c Render/shapes.c  Render/rendering_utils.c \
        pars_maths/ft_split.c pars_maths/parsing.c pars_maths/parsing2.c \
 	   pars_maths/parsing3.c pars_maths/parsing4.c pars_maths/camera.c \

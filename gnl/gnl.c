@@ -56,11 +56,11 @@ static char	*extract_line_from_remainder(char **remainder, t_gc **gc)
 	return (line);
 }
 
-static int	remainder_update(char **remainder, char *buf, ssize_t readed_bytes, t_gc **gc)
+int	remainder_update(char **remainder, char *buf, ssize_t r, t_gc **gc)
 {
 	char	*temp;
 
-	buf[readed_bytes] = '\0';
+	buf[r] = '\0';
 	if (*remainder)
 	{
 		temp = ft_strjoin(*remainder, buf, gc);
@@ -70,7 +70,7 @@ static int	remainder_update(char **remainder, char *buf, ssize_t readed_bytes, t
 	}
 	else
 	{
-		*remainder = ft_strndup(buf, readed_bytes, gc);
+		*remainder = ft_strndup(buf, r, gc);
 		if (!*remainder)
 			return (0);
 	}

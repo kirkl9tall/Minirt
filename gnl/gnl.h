@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: m45kf4c3 </var/spool/mail/m45kf4c3>        +#+  +:+       +#+        */
+/*   By: zatais <zatais@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/27 19:08:22 by m45kf4c3          #+#    #+#             */
-/*   Updated: 2025/09/27 19:08:22 by m45kf4c3         ###   ########.fr       */
+/*   Created: 2025/11/16 17:33:11 by zatais            #+#    #+#             */
+/*   Updated: 2025/11/16 17:33:11 by zatais           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GNL_H
+# define GNL_H
 
+# include "../gc/gc.h"
 # include <stdlib.h>
 # include <unistd.h>
-# include "../GC/gc.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 5

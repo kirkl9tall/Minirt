@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zatais <zatais@student.1337.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/16 17:31:51 by zatais            #+#    #+#             */
+/*   Updated: 2025/11/16 17:31:51 by zatais           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 int	check_file_mini(char *argv)
@@ -7,7 +19,6 @@ int	check_file_mini(char *argv)
 
 	i = 0;
 	dot_pos = -1;
-
 	while (argv[i])
 	{
 		if (argv[i] == '.')
@@ -17,7 +28,7 @@ int	check_file_mini(char *argv)
 	if (dot_pos == -1 || dot_pos == 0 || argv[dot_pos + 1] != 'r'
 		|| argv[dot_pos + 2] != 't' || argv[dot_pos + 3] != '\0')
 	{
-		write(2, "Error: Invalid .rt file \n", 26);
+		printf("Error: Invalid .rt file \n");
 		return (0);
 	}
 	return (1);
@@ -34,17 +45,17 @@ int	init_mini(t_mini *mini, char *title)
 	mini->mlx_utils.img = mlx_new_image(mini->mlx_utils.mlx, W_W, W_H);
 	if (!mini->mlx_utils.img)
 		return (1);
-
 	mini->mlx_utils.addr = mlx_get_data_addr(mini->mlx_utils.img,
-												&mini->mlx_utils.bpp,
-												&mini->mlx_utils.size_line,
-												&mini->mlx_utils.endian);
-    if (!mini->mlx_utils.addr)
-        return (1);
+			&mini->mlx_utils.bpp, &mini->mlx_utils.size_line,
+			&mini->mlx_utils.endian);
+	if (!mini->mlx_utils.addr)
+		return (1);
 	return (0);
 }
+
 int	close_window(t_mini *mini)
 {
+	gc_clean(&mini->gc);
 	exit(0);
 }
 
@@ -55,7 +66,9 @@ int	handle_keypress(int keysym, t_mini *mini)
 		gc_clean(&mini->gc);
 		exit(0);
 	}
+	return (1);
 }
+
 int	main(int argc, char *argv[])
 {
 	t_mini	mini;
@@ -79,7 +92,7 @@ int	main(int argc, char *argv[])
 		project_camera(&mini);
 		render_scene(&mini);
 		mlx_hook(mini.mlx_utils.win, 17, 0, close_window, &mini);
-		mlx_key_hook(mini.mlx_utils.win, handle_keypress,&mini);
+		mlx_key_hook(mini.mlx_utils.win, handle_keypress, &mini);
 		mlx_loop(mini.mlx_utils.mlx);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zatais <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: zatais <zatais@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/16 16:06:07 by zatais            #+#    #+#             */
-/*   Updated: 2025/11/16 16:06:07 by zatais           ###   ########.fr       */
+/*   Created: 2025/11/16 17:32:16 by zatais            #+#    #+#             */
+/*   Updated: 2025/11/16 17:32:16 by zatais           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_vec3	add_light_shadow(t_mini *mini, t_hit hit)
 	final_color.z = mini->amb.color.z * mini->amb.alr * hit.color.z / 255.0;
 	if (!is_in_shadow(mini, hit.point, hit.normal, &light_dir))
 	{
-		brightness = vect_prod(hit.normal, light_dir);
+		brightness = fmax(vect_prod(hit.normal, light_dir), 0);
 		diffuse.x = (mini->light.color.x * hit.color.x * brightness
 				* mini->light.lbr) / 255;
 		diffuse.y = (mini->light.color.y * hit.color.y * brightness
