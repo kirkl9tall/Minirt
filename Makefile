@@ -3,6 +3,7 @@ SRCS = GC/gc.c GNL/gnl.c GNL/gnl_utils.c  Render/start_rendering.c \
        pars_maths/ft_split.c pars_maths/parsing.c pars_maths/parsing2.c \
 	   pars_maths/parsing3.c pars_maths/parsing4.c pars_maths/camera.c \
 	   pars_maths/vec_maths.c pars_maths/vec_maths2.c main.c \
+	   Render/shapes_utils.c 
 
 OBJS = $(SRCS:.c=.o)
 

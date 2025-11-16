@@ -31,7 +31,6 @@
 # define W_W 800
 # define W_H 600
 
-
 typedef struct s_vec3
 {
 	double			x;
@@ -40,7 +39,7 @@ typedef struct s_vec3
 }					t_vec3;
 typedef struct s_equa
 {
-	t_vec3 			oc;
+	t_vec3			oc;
 	double			a;
 	double			b;
 	double			c;
@@ -66,7 +65,7 @@ typedef struct s_cam
 	t_vec3			orient;
 	t_vec3			up_v;
 	t_vec3			right_v;
-	
+
 }					t_cam;
 
 typedef struct s_light
@@ -139,12 +138,12 @@ typedef struct s_hit
 
 typedef struct s_fch
 {
-	int			hit_anything;
-	double		closest_so_far;
-	t_hit		temp_hit;
-	t_sphere	*current_sph;
-	t_plan		*current_plane;
-	t_cylin		*current_cylinder;
+	int				hit_anything;
+	double			closest_so_far;
+	t_hit			temp_hit;
+	t_sphere		*current_sph;
+	t_plan			*current_plane;
+	t_cylin			*current_cylinder;
 }					t_fch;
 typedef struct s_mini
 {
@@ -213,4 +212,8 @@ void				assign_l(t_mini *mini, char **splited);
 void				assign_pl(t_mini *mini, char **splited);
 void				assign_sph(t_mini *mini, char **splited);
 void				past_sph(t_mini *mini, t_sphere *sph);
+int					caps(t_ray ray, t_cylin *cy, t_hit *hit, t_vec3 center_cap,
+						int u);
+void				init(t_hit *hit, t_equa f, t_cylin *cy);
+void				norm_v1(t_cylin *cy, t_ray ray, t_hit *hit);
 #endif
