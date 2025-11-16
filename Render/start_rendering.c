@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   start_rendering.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zatais <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/16 16:17:30 by zatais            #+#    #+#             */
+/*   Updated: 2025/11/16 16:17:30 by zatais           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minirt.h"
 
 t_ray	generate_ray(t_mini *mini, int screen_x, int screen_y)
@@ -7,8 +19,7 @@ t_ray	generate_ray(t_mini *mini, int screen_x, int screen_y)
 	double	vp_y;
 	t_vec3	direction;
 
-	vp_x = (1 - 2.0 * ((screen_x + 0.5) / W_W)) * (mini->cam.width_canva
-			/ 2.0);
+	vp_x = (1 - 2.0 * ((screen_x + 0.5) / W_W)) * (mini->cam.width_canva / 2.0);
 	vp_y = (1.0 - 2.0 * ((screen_y + 0.5) / W_H)) * (mini->cam.height_canva
 			/ 2.0);
 	ray.origin = mini->cam.pos;
@@ -31,14 +42,15 @@ t_vec3	ray_trace(t_mini *mini, t_ray ray)
 	return ((t_vec3){0, 0, 0});
 }
 
-void	my_put_pixel(t_mini *mini, int x, int y, t_vec3 vec3_color)
+void	my_put_pixel(t_mini *mini, int x, int y, t_vec3 color)
 {
 	char	*pixel;
-    int color;
+	int		final_color;
+
 	pixel = mini->mlx_utils.addr + (y * mini->mlx_utils.size_line) + (x
 			* (mini->mlx_utils.bpp / 8));
-    color = ((int)vec3_color.x << 16) | ((int)vec3_color.y << 8) | (int)vec3_color.z;
-	*(int *)pixel = color;
+	final_color = ((int)color.x << 16) | ((int)color.y << 8) | (int)color.z;
+	*(int *)pixel = final_color;
 }
 
 void	render_scene(t_mini *mini)
