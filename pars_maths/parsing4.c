@@ -6,7 +6,7 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 14:02:54 by abismail          #+#    #+#             */
-/*   Updated: 2025/11/15 14:16:08 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/16 16:55:07 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	error_pinting(char *error)
 {
 	printf("Error\n%s\n", error);
+	gc_clean(get_gc(NULL));
+	exit(1);
 }
 
 void	assign_a(t_mini *mini, char **splited)

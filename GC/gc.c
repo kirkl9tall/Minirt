@@ -1,10 +1,21 @@
-#include "gc.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gc.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/16 16:58:11 by abismail          #+#    #+#             */
+/*   Updated: 2025/11/16 16:58:12 by abismail         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "gc.h"
 
 t_gc	**get_gc(t_gc **new_gc)
 {
-    static t_gc	**gc_ptr = NULL;
-	
+	static t_gc	**gc_ptr = NULL;
+
 	if (new_gc)
 		gc_ptr = new_gc;
 	return (gc_ptr);

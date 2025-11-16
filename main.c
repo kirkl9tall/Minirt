@@ -7,6 +7,7 @@ int	check_file_mini(char *argv)
 
 	i = 0;
 	dot_pos = -1;
+
 	while (argv[i])
 	{
 		if (argv[i] == '.')
@@ -55,7 +56,6 @@ int	handle_keypress(int keysym, t_mini *mini)
 		exit(0);
 	}
 }
-
 int	main(int argc, char *argv[])
 {
 	t_mini	mini;
@@ -63,10 +63,16 @@ int	main(int argc, char *argv[])
 
 	if (argc == 2)
 	{
+		get_gc(&mini.gc);
 		if (!check_file_mini(argv[1]))
 			return (0);
 		ft_memset(&mini, 0, sizeof(t_mini));
 		fd = open(argv[1], O_RDONLY);
+		if (fd == -1)
+		{
+			printf("File not found\n");
+			return (1);
+		}
 		parsing(fd, &mini);
 		if (init_mini(&mini, "MiniRT"))
 			return (gc_clean(&mini.gc), 0);

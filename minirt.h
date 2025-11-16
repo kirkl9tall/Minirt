@@ -6,7 +6,7 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:58:25 by m45kf4c3          #+#    #+#             */
-/*   Updated: 2025/11/16 16:25:23 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/16 16:50:31 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,5 +216,4 @@ void				past_sph(t_mini *mini, t_sphere *sph);
 int					caps(t_ray ray, t_cylin *cy, t_hit *hit, t_vec3 center_cap);
 void				init(t_hit *hit, t_equa f, t_cylin *cy);
 void				norm_v1(t_cylin *cy, t_ray ray, t_hit *hit);
-
 #endif

@@ -6,7 +6,7 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 16:10:03 by zatais            #+#    #+#             */
-/*   Updated: 2025/11/16 16:26:50 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/16 16:57:20 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,38 @@ void	init(t_hit *hit, t_equa f, t_cylin *cy)
 	hit->point = cy->hit_point;
 }
 
+void	fch2(t_mini *mini, t_ray ray, t_hit *hit, t_fch *t)
+{
+	while (t->current_sph)
+	{
+		if (hit_sphere(ray, t->current_sph, &t->temp_hit)
+			&& t->temp_hit.t < t->closest_so_far)
+		{
+			t->closest_so_far = t->temp_hit.t;
+			*hit = t->temp_hit;
+			t->hit_anything = 1;
+		}
+		t->current_sph = t->current_sph->next;
+	}
+	while (t->current_cylinder)
+	{
+		t->temp_hit.t = t->closest_so_far;
+		if (hit_cylinder(ray, t->current_cylinder, &t->temp_hit)
+			&& t->temp_hit.t < t->closest_so_far)
+		{
+			t->closest_so_far = t->temp_hit.t;
+			*hit = t->temp_hit;
+			t->hit_anything = 1;
+		}
+		t->current_cylinder = t->current_cylinder->next;
+	}
+}
+
 int	find_closest_hit(t_mini *mini, t_ray ray, t_hit *hit)
 {
 	t_fch	t;
 
 	init_v2(mini, &t);
-	while (t.current_sph)
-	{
-		if (hit_sphere(ray, t.current_sph, &t.temp_hit)
-			&& t.temp_hit.t < t.closest_so_far)
-		{
-			t.closest_so_far = t.temp_hit.t;
-			*hit = t.temp_hit;
-			t.hit_anything = 1;
-		}
-		t.current_sph = t.current_sph->next;
-	}
 	while (t.current_plane)
 	{
 		if (hit_plane(ray, t.current_plane, &t.temp_hit)
@@ -67,17 +83,6 @@ int	find_closest_hit(t_mini *mini, t_ray ray, t_hit *hit)
 		}
 		t.current_plane = t.current_plane->next;
 	}
-	while (t.current_cylinder)
-	{
-		t.temp_hit.t = t.closest_so_far;
-		if (hit_cylinder(ray, t.current_cylinder, &t.temp_hit)
-			&& t.temp_hit.t < t.closest_so_far)
-		{
-			t.closest_so_far = t.temp_hit.t;
-			*hit = t.temp_hit;
-			t.hit_anything = 1;
-		}
-		t.current_cylinder = t.current_cylinder->next;
-	}
+	fch2(mini, ray, hit, &t);
 	return (t.hit_anything);
 }
