@@ -6,11 +6,11 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 13:45:21 by abismail          #+#    #+#             */
-/*   Updated: 2025/11/12 14:04:33 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/15 14:15:52 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../minirt.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

@@ -6,11 +6,11 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 14:08:38 by abismail          #+#    #+#             */
-/*   Updated: 2025/11/12 14:09:29 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/15 14:15:23 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../minirt.h"
 
 int	ft_atoi(char *nptr)
 {

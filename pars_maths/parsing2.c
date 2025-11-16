@@ -6,11 +6,11 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 13:59:27 by abismail          #+#    #+#             */
-/*   Updated: 2025/11/12 13:59:28 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/15 14:15:59 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../minirt.h"
 
 void	assign_params_cy(t_cylin *cy, char **splited, t_mini *mini,
 		char **splited_comma)

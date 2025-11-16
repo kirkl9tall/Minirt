@@ -6,11 +6,11 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 14:02:22 by abismail          #+#    #+#             */
-/*   Updated: 2025/11/12 14:04:52 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/15 14:16:04 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../minirt.h"
 
 void	past_pl(t_mini *mini, t_plan *plane)
 {

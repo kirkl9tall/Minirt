@@ -6,11 +6,11 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 14:02:54 by abismail          #+#    #+#             */
-/*   Updated: 2025/11/12 14:05:20 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/15 14:16:08 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../minirt.h"
 
 void	error_pinting(char *error)
 {

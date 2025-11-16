@@ -97,7 +97,7 @@ int euqation_cylinder(t_ray ray , t_cylin *cy,t_equa *f)
         f->x = f->x1;
     else
         f->x = f->x2;
-
+	return (1);
 }
 void norm_v1(t_cylin *cy, t_ray ray, t_hit *hit)
 {

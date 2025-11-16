@@ -6,11 +6,11 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 14:10:06 by abismail          #+#    #+#             */
-/*   Updated: 2025/11/12 14:13:23 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/15 14:16:14 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../minirt.h"
 
 t_vec3	vect_addi(t_vec3 v1, t_vec3 v2)
 {

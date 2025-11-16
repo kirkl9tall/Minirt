@@ -6,11 +6,11 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 14:10:49 by abismail          #+#    #+#             */
-/*   Updated: 2025/11/12 14:13:50 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/15 14:16:19 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../minirt.h"
 
 double	vect_len(t_vec3 v1)
 {

@@ -6,11 +6,11 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 14:06:30 by abismail          #+#    #+#             */
-/*   Updated: 2025/11/12 14:07:05 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/15 14:15:40 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../minirt.h"
 
 int	check_cross(t_vec3 v1, t_vec3 v2)
 {

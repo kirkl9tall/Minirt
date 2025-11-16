@@ -1,7 +1,8 @@
 SRCS = GC/gc.c GNL/gnl.c GNL/gnl_utils.c  Render/start_rendering.c \
-	   utils_pars.c Render/shapes.c  Render/rendering_utils.c \
-       ft_split.c parsing.c parsing2.c parsing3.c parsing4.c camera.c vec_maths.c \
-		vec_maths2.c main.c \
+	   pars_maths/utils_pars.c Render/shapes.c  Render/rendering_utils.c \
+       pars_maths/ft_split.c pars_maths/parsing.c pars_maths/parsing2.c \
+	   pars_maths/parsing3.c pars_maths/parsing4.c pars_maths/camera.c \
+	   pars_maths/vec_maths.c pars_maths/vec_maths2.c main.c \
 
 OBJS = $(SRCS:.c=.o)
 
