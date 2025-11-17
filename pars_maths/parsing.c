@@ -6,7 +6,7 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 13:45:21 by abismail          #+#    #+#             */
-/*   Updated: 2025/11/16 16:44:09 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/17 18:30:10 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	count_split(char **splited)
 		cleaner_exit();
 	while (splited[i])
 		i++;
+	if (*splited[i - 1] == '\n')
+		--i;
 	return (i);
 }
 

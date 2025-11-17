@@ -6,7 +6,7 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:58:25 by m45kf4c3          #+#    #+#             */
-/*   Updated: 2025/11/16 17:19:32 by zatais           ###   ########.fr       */
+/*   Updated: 2025/11/17 17:11:06 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "gc/gc.h"
 # include "gnl/gnl.h"
-# include "minilibx-linux/mlx.h"
+# include "/usr/include/minilibx-linux/mlx.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
@@ -155,7 +155,6 @@ typedef struct s_mini
 	t_sphere		*sph;
 	t_light			light;
 	t_plan			*plane;
-	char			**pars;
 	t_mlx			mlx_utils;
 
 }					t_mini;

@@ -6,7 +6,7 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 16:10:03 by zatais            #+#    #+#             */
-/*   Updated: 2025/11/16 16:57:20 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/17 17:31:21 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	init(t_hit *hit, t_equa f, t_cylin *cy)
 	hit->point = cy->hit_point;
 }
 
-void	fch2(t_mini *mini, t_ray ray, t_hit *hit, t_fch *t)
+void	fch2(t_ray ray, t_hit *hit, t_fch *t)
 {
 	while (t->current_sph)
 	{
@@ -83,6 +83,6 @@ int	find_closest_hit(t_mini *mini, t_ray ray, t_hit *hit)
 		}
 		t.current_plane = t.current_plane->next;
 	}
-	fch2(mini, ray, hit, &t);
+	fch2(ray, hit, &t);
 	return (t.hit_anything);
 }

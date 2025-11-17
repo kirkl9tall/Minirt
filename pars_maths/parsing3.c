@@ -6,7 +6,7 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 14:02:22 by abismail          #+#    #+#             */
-/*   Updated: 2025/11/15 14:16:04 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/17 18:32:33 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	assign_pl(t_mini *mini, char **splited)
 	int		rgb[3];
 	char	**splited_comma;
 	int		i;
-	t_plan	*trav;
 
+	splited_comma = NULL;
 	plane = gc_malloc(&mini->gc, sizeof(t_plan));
 	assign_params_pl(plane, splited, mini, splited_comma);
 	splited_comma = ft_split(splited[3], ',', &mini->gc);
@@ -86,9 +86,9 @@ void	assign_sph(t_mini *mini, char **splited)
 	int			rgb[3];
 	char		**splited_comma;
 	int			i;
-	t_sphere	*trav;
 
 	i = 0;
+	splited_comma = NULL;
 	sph = gc_malloc(&mini->gc, sizeof(t_sphere));
 	assign_params_sph(sph, splited, mini, splited_comma);
 	splited_comma = ft_split(splited[3], ',', &mini->gc);

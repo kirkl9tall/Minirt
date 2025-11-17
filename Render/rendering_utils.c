@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   rendering_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zatais <zatais@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 17:32:16 by zatais            #+#    #+#             */
-/*   Updated: 2025/11/16 17:32:16 by zatais           ###   ########.fr       */
+/*   Updated: 2025/11/17 17:26:15 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 
-int	is_in_shadow(t_mini *mini, t_vec3 point, t_vec3 normal, t_vec3 *light_dir)
+int	is_in_shadow(t_mini *mini, t_vec3 point, t_vec3 *light_dir)
 {
 	t_ray	shadow_ray;
 	t_hit	shadow_hit;
@@ -40,7 +40,7 @@ t_vec3	add_light_shadow(t_mini *mini, t_hit hit)
 	final_color.x = mini->amb.color.x * mini->amb.alr * hit.color.x / 255.0;
 	final_color.y = mini->amb.color.y * mini->amb.alr * hit.color.y / 255.0;
 	final_color.z = mini->amb.color.z * mini->amb.alr * hit.color.z / 255.0;
-	if (!is_in_shadow(mini, hit.point, hit.normal, &light_dir))
+	if (!is_in_shadow(mini, hit.point, &light_dir))
 	{
 		brightness = fmax(vect_prod(hit.normal, light_dir), 0);
 		diffuse.x = (mini->light.color.x * hit.color.x * brightness

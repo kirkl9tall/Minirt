@@ -6,7 +6,7 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 13:59:27 by abismail          #+#    #+#             */
-/*   Updated: 2025/11/15 14:15:59 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/17 18:33:33 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ void	assign_cy(t_mini *mini, char **splited)
 	int		rgb[3];
 	char	**splited_comma;
 	int		i;
-	t_cylin	*trav;
 
 	i = 0;
+	splited_comma = NULL;
 	cy = gc_malloc(&mini->gc, sizeof(t_cylin));
 	assign_params_cy(cy, splited, mini, splited_comma);
 	splited_comma = ft_split(splited[5], ',', &mini->gc);
@@ -78,7 +78,7 @@ void	assigner(t_mini *mini, char **splited)
 		assign_a(mini, splited);
 	else if (!ft_strcmp(splited[0], "C"))
 		assign_c(mini, splited);
-	if (!ft_strcmp(splited[0], "L"))
+	else if (!ft_strcmp(splited[0], "L"))
 		assign_l(mini, splited);
 	else if (!ft_strcmp(splited[0], "pl"))
 		assign_pl(mini, splited);
@@ -86,6 +86,11 @@ void	assigner(t_mini *mini, char **splited)
 		assign_sph(mini, splited);
 	else if (!ft_strcmp(splited[0], "cy"))
 		assign_cy(mini, splited);
+	else if (!ft_strcmp(splited[0], "\n"))
+		return ;
+	else
+		error_pinting("Invalid identifier");
+		
 }
 
 void	parsing(int fd, t_mini *mini)
