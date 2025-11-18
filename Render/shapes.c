@@ -6,7 +6,7 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 16:07:26 by zatais            #+#    #+#             */
-/*   Updated: 2025/11/16 16:25:42 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/18 16:42:11 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ int	caps(t_ray ray, t_cylin *cy, t_hit *hit, t_vec3 center_cap)
 	double	denominator;
 	t_vec3	hit_point;
 
-	denominator = vect_prod(ray.direction, vect_normalized(cy->nv_cy));
+	denominator = vect_prod(ray.direction, cy->nv_cy);
 	if (fabs(denominator) < 1e-6)
 		return (0);
-	t = vect_prod(vect_subs(center_cap, ray.origin), vect_normalized(cy->nv_cy))
+	t = vect_prod(vect_subs(center_cap, ray.origin), cy->nv_cy)
 		/ denominator;
 	if (t < 1e-6 || t >= hit->t)
 		return (0);
@@ -78,9 +78,9 @@ int	caps(t_ray ray, t_cylin *cy, t_hit *hit, t_vec3 center_cap)
 	{
 		hit->t = t;
 		hit->point = hit_point;
-		hit->normal = vect_normalized(vect_multi(cy->nv_cy, -1));
+		hit->normal = vect_multi(cy->nv_cy, -1);
 		if (cy->u_cap == 1)
-			hit->normal = vect_normalized(cy->nv_cy);
+			hit->normal = cy->nv_cy;
 		hit->color = cy->color;
 		return (1);
 	}

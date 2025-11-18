@@ -6,7 +6,7 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 13:59:27 by abismail          #+#    #+#             */
-/*   Updated: 2025/11/17 18:33:33 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/18 14:40:40 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	assign_cy(t_mini *mini, char **splited)
 	while (splited_comma[i])
 	{
 		rgb[i] = ft_atoi(splited_comma[i]);
-		if (rgb[i] < 0 && rgb[i] > 255)
+		if (rgb[i] < 0 || rgb[i] > 255)
 			error_pinting("Invalid Ambient lighting color format\n");
 		i++;
 	}
@@ -90,7 +90,6 @@ void	assigner(t_mini *mini, char **splited)
 		return ;
 	else
 		error_pinting("Invalid identifier");
-		
 }
 
 void	parsing(int fd, t_mini *mini)

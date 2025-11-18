@@ -6,7 +6,7 @@
 /*   By: abismail <abismail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 14:02:54 by abismail          #+#    #+#             */
-/*   Updated: 2025/11/16 16:55:07 by abismail         ###   ########.fr       */
+/*   Updated: 2025/11/17 18:35:45 by abismail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	assign_a(t_mini *mini, char **splited)
 	while (splited_comma[i])
 	{
 		rgb[i] = ft_atoi(splited_comma[i]);
-		if (rgb[i] < 0 && rgb[i] > 255)
+		if (rgb[i] < 0 || rgb[i] > 255)
 			error_pinting("Invalid Ambient lighting color format\n");
 		i++;
 	}
@@ -79,7 +79,7 @@ void	assign_l(t_mini *mini, char **splited)
 	while (splited_comma[i])
 	{
 		rgb[i] = ft_atoi(splited_comma[i]);
-		if (rgb[i] < 0 && rgb[i] > 255)
+		if (rgb[i] < 0 || rgb[i] > 255)
 			error_pinting("Invalid Ambient lighting color format\n");
 		i++;
 	}
