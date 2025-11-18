@@ -8,13 +8,17 @@ SRCS = gc/gc.c gnl/gnl.c gnl/gnl_utils.c  Render/start_rendering.c \
 OBJS = $(SRCS:.c=.o)
 
 CC      = cc
-CFLAGS  =  -g -I$(MLX_DIR) -Wall -Werror -Wextra
+CFLAGS  = -I$(MLX_DIR) -Wall -Werror -Wextra
 MLX_DIR = /usr/include/minilibx-linux
 LDFLAGS = -L$(MLX_DIR)
 LDLIBS  = -lmlx -lXext -lX11 -lm
 
 RM = rm -rf
 NAME = miniRT
+
+%.o: %.c minirt.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
 
 all: $(NAME)
 
